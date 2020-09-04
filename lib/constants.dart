@@ -8,3 +8,14 @@ TextStyle kSearchTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 19,
 );
+
+TextStyle kSongItemNumTextStyle = TextStyle(
+  fontFamily: 'roboto',
+  fontWeight: FontWeight.w600,
+  fontSize: 32,
+);
+
+TextStyle kSongItemTitleTextStyle = TextStyle(
+  fontFamily: 'roboto',
+  fontSize: 20,
+);

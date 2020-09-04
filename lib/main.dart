@@ -5,6 +5,6 @@ import 'package:songbook_flutter/screens/song_menu.dart';
 void main() {
   runApp(MaterialApp(
     home: SongMenu(),
-    theme: ThemeData.light().copyWith(),
+    theme: ThemeData.light(),
   ));
 }
