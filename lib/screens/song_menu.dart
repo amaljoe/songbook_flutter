@@ -11,17 +11,19 @@ class _SongMenuState extends State<SongMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        Container(
-          padding:
-              EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-          color: Colors.green,
-          child: Container(
-            color: Colors.yellow,
+      body: SafeArea(
+        child: Stack(children: [
+          Container(
+            padding:
+                EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
+            color: Colors.green,
+            child: Container(
+              color: Colors.white,
+            ),
           ),
-        ),
-        SongToolbar(),
-      ]),
+          SongToolbar(),
+        ]),
+      ),
     );
   }
 }
