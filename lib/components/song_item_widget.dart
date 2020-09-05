@@ -21,7 +21,7 @@ class SongItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              songItem.num.toString(),
+              songItem.songId.toString(),
               style: kSongItemNumTextStyle,
             ),
             SizedBox(

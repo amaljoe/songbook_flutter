@@ -34,7 +34,7 @@ class SongItemManager {
   തിരുമുമ്പില്‍ ഞാന്‍ നിന്നിടുമേ (വാഴ്‌ത്തുമേ..)""",
         title: 'അടവിതരുക്കളിന്നിടയില് ഒരുനാരകം എന്നവണ്ണം',
         titleEng: 'adavitharukalinidayil oru naarakam',
-        num: 501),
+        songId: 501),
     SongItem(
       lyrics: """   പരിശുദ്ധാത്മാവേ ശക്തി പകര്‍ന്നിടണേ 
    അവിടുത്തെ ബലം ഞങ്ങള്‍ക്കാവശ്യമെന്ന് 
@@ -57,7 +57,7 @@ class SongItemManager {
       title:
           'പരിശുദ്ധാത്മാവേ ശക്തി പകര്‍ന്നിടണേ അവിടുത്തെ ബലം ഞങ്ങള്‍ക്കാവശ്യമെന്ന്',
       titleEng: 'parishudhanmaave shakthi pakarnidane',
-      num: 502,
+      songId: 502,
     ),
     SongItem(
       lyrics: """ഉണര്‍വ്വിന്‍ വരം ലഭിപ്പാന്‍ 
@@ -81,7 +81,7 @@ class SongItemManager {
   ഈ ശിഷ്യരാം നിന്‍ ദാസരിന്മേല്‍ (ഉണര്‍വ്വിന്‍..‍) """,
       titleEng: 'unarvin varam labhikaan',
       title: 'ഉണര്‍വ്വിന്‍ വരം ലഭിപ്പാന്‍ ഞങ്ങള്‍ വരുന്നൂ തിരുസവിധേ‍',
-      num: 503,
+      songId: 503,
     ),
   ];
 
