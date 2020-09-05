@@ -19,3 +19,8 @@ TextStyle kSongItemTitleTextStyle = TextStyle(
   fontFamily: 'roboto',
   fontSize: 20,
 );
+
+TextStyle kSongLyricsTextStyle = TextStyle(
+  fontFamily: 'roboto',
+  fontSize: 18,
+);

@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:songbook_flutter/constants.dart';
 
 class SongToolbar extends StatelessWidget {
+  final IconData navigationIcon;
+  final Function onIconPressed;
+  SongToolbar({
+    @required this.navigationIcon,
+    @required this.onIconPressed,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,16 +28,16 @@ class SongToolbar extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.menu),
+                  icon: Icon(navigationIcon),
                   iconSize: 30.0,
-                  onPressed: () {},
+                  onPressed: onIconPressed,
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(top: 8.0),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(),
@@ -40,7 +46,7 @@ class SongToolbar extends StatelessWidget {
                       child: TextField(
                         decoration: InputDecoration(
                           icon: Padding(
-                            padding: const EdgeInsets.only(left: 12.0),
+                            padding: EdgeInsets.only(left: 12.0),
                             child: Icon(
                               Icons.search,
                               color: Colors.black,
