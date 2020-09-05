@@ -14,7 +14,7 @@ class SongListMenu extends StatefulWidget {
 class _SongListMenuState extends State<SongListMenu> {
   SongItemManager songItemManager = SongItemManager();
   SongsDatabase songsDatabase = SongsDatabase();
-  List<SongItem> songs;
+  double topPadding;
 
   Future<List<SongItem>> getSongs() async {
     await songsDatabase.openSongsDatabase();
@@ -27,25 +27,30 @@ class _SongListMenuState extends State<SongListMenu> {
         future: getSongs(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Padding(
-                padding: EdgeInsets.only(
-                    top: kToolbarBorderRadius, left: 4, right: 4),
-                child: ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, i) {
-                    return SongItemWidget(
-                      songItem: snapshot.data[i],
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return SongDisplay(songNum: i);
-                          }),
-                        );
-                      },
-                    );
-                  },
-                ));
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, i) {
+                if (i == 0) {
+                  topPadding = kToolbarBorderRadius;
+                } else {
+                  topPadding = 0;
+                }
+                return Padding(
+                  padding: EdgeInsets.only(top: topPadding),
+                  child: SongItemWidget(
+                    songItem: snapshot.data[i],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return SongDisplay(songNum: i);
+                        }),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
           } else {
             return Container();
           }

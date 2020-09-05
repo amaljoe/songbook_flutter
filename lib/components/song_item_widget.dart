@@ -16,7 +16,10 @@ class SongItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.0,
+          vertical: 8.0,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
