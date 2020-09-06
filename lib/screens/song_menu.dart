@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/components/song_item_widget.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
-import 'package:songbook_flutter/screens/song_display.dart';
-import 'package:songbook_flutter/song_item.dart';
-import 'package:songbook_flutter/song_item_manager.dart';
-import 'package:songbook_flutter/songs_database.dart';
 
 class SongMenu extends StatefulWidget {
   @override

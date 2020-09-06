@@ -3,7 +3,6 @@ import 'package:songbook_flutter/components/song_item_widget.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import '../constants.dart';
 import '../song_item.dart';
-import '../song_item_manager.dart';
 import '../songs_database.dart';
 
 class SongListMenu extends StatefulWidget {
@@ -12,7 +11,6 @@ class SongListMenu extends StatefulWidget {
 }
 
 class _SongListMenuState extends State<SongListMenu> {
-  SongItemManager songItemManager = SongItemManager();
   SongsDatabase songsDatabase = SongsDatabase();
   double topPadding;
 
@@ -57,42 +55,3 @@ class _SongListMenuState extends State<SongListMenu> {
         });
   }
 }
-
-// Column(
-// mainAxisSize: MainAxisSize.max,
-// children: [
-// SongItemWidget(
-// songItem: snapshot.data[0],
-// onPressed: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(builder: (context) {
-// return SongDisplay(songNum: 1);
-// }),
-// );
-// },
-// ),
-// SongItemWidget(
-// songItem: snapshot.data[1],
-// onPressed: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(builder: (context) {
-// return SongDisplay(songNum: 2);
-// }),
-// );
-// },
-// ),
-// SongItemWidget(
-// songItem: snapshot.data[2],
-// onPressed: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(builder: (context) {
-// return SongDisplay(songNum: 3);
-// }),
-// );
-// },
-// ),
-// ],
-// ),
