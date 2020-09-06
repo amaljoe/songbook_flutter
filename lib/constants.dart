@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 double kSongToolbarHeight = 150.0;
 double kToolbarBorderRadius = 30.0;
@@ -23,4 +24,8 @@ TextStyle kSongItemTitleTextStyle = TextStyle(
 TextStyle kSongLyricsTextStyle = TextStyle(
   fontFamily: 'roboto',
   fontSize: 18,
+);
+
+TextStyle kHeaderTextStyle = GoogleFonts.pacifico(
+  fontSize: 32,
 );

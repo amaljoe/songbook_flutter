@@ -4,9 +4,11 @@ import 'package:songbook_flutter/constants.dart';
 class SongToolbar extends StatelessWidget {
   final IconData navigationIcon;
   final Function onIconPressed;
+  final Widget childHeader;
   SongToolbar({
     @required this.navigationIcon,
     @required this.onIconPressed,
+    @required this.childHeader,
   });
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class SongToolbar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Container(),
+                  child: childHeader,
                 ),
               ],
             ),

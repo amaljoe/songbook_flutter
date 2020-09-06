@@ -3,6 +3,8 @@ import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
 
+import '../constants.dart';
+
 class SongMenu extends StatefulWidget {
   @override
   _SongMenuState createState() => _SongMenuState();
@@ -26,6 +28,12 @@ class _SongMenuState extends State<SongMenu> {
           SongToolbar(
             navigationIcon: Icons.menu,
             onIconPressed: () {},
+            childHeader: Center(
+              child: Text(
+                'Songbook',
+                style: kHeaderTextStyle,
+              ),
+            ),
           ),
         ]),
       ),

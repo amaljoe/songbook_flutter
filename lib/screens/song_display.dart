@@ -3,6 +3,8 @@ import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/songs_database.dart';
 
+import '../components/song_item_widget.dart';
+import '../song_item.dart';
 import '../song_item.dart';
 
 class SongDisplay extends StatefulWidget {
@@ -56,6 +58,13 @@ class _SongDisplayState extends State<SongDisplay> {
             onIconPressed: () {
               Navigator.pop(context);
             },
+            childHeader: Center(
+              child: SongItemWidget(
+                  songItem: SongItem(
+                      title: 'നിന്‍റെ ഹിതം പോലെയെന്നെ നിത്യം നടത്തീടേണമേ',
+                      songId: 258),
+                  onPressed: () {}),
+            ),
           ),
         ]),
       ),
