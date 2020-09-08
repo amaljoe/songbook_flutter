@@ -2,7 +2,7 @@
 
 Christian songbook in Malayalam made with Flutter for both Andrioid and IOS platform.  
 
-This app is currently being ported to flutter(IOS - Android cross platform framework).  
+This app is currently been ported to flutter(IOS - Android cross platform framework).  
 Visit the following repo for the older version made for Android which has more features at present :  
 https://github.com/amaljoe/songbook_native_android  
 
