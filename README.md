@@ -6,7 +6,7 @@ This app is currently been ported to flutter(IOS - Android cross platform framew
 Visit the following repo for the older version made for Android which has more features at present :  
 https://github.com/amaljoe/songbook_native_android  
 
-Additional Features (TODO) :  
+## Additional Features (TODO) :  
 -> List out the songs in a menu format.  
 -> 'Always on screen' while opening the lyrics page.  
 -> Beautiful UI animations and transitions in between screen changes.  
@@ -17,7 +17,7 @@ Additional Features (TODO) :
 -> User can add a song to their favourites list.  
 -> Individual accounts linked to google for each user to store their favourite songs and personalised recomendations.  
 
-AI Integrated Feature(Under Development) :  
+## AI Integrated Feature(Under Development) :  
 -> Auto detect a song while in church so that it can be opened even if the user doesn't know the song number or title.  
 
 Programming languages used :  
