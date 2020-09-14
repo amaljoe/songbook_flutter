@@ -10,14 +10,14 @@ class SongDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(children: [
           Container(
             padding:
                 EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            color: Colors.green,
-            child: SingleChildScrollView(
-              child: Container(
+            child: ListView(children: [
+              Container(
                 color: Colors.white,
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -30,7 +30,7 @@ class SongDisplay extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ]),
           ),
           SongToolbar(
             navigationIcon: Icons.arrow_back,

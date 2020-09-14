@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
+import 'package:songbook_flutter/models/song_data.dart';
 
 import '../constants.dart';
 
@@ -11,6 +12,19 @@ class SongMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('menu opened');
+    if (!Provider.of<SongData>(context).songsLoaded) {
+      Provider.of<SongData>(context).loadDatabase();
+      return Scaffold(
+        body: Container(
+          child: Center(
+            child: Text(
+              'Songbook',
+              style: kHeaderTextStyle,
+            ),
+          ),
+        ),
+      );
+    }
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
@@ -27,14 +41,9 @@ class SongMenu extends StatelessWidget {
             navigationIcon: Icons.menu,
             onIconPressed: () {},
             childHeader: Center(
-              child: Hero(
-                tag: 'appTitle',
-                child: Text(
-                  'Songbook',
-                  style: GoogleFonts.pacifico(
-                    fontSize: 32,
-                  ),
-                ),
+              child: Text(
+                'Songbook',
+                style: kHeaderTextStyle,
               ),
             ),
           ),

@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Provider.of<SongData>(context).songsLoaded
-          ? SongMenu.id
-          : LoadingScreen.id,
+      initialRoute: SongMenu.id,
       theme: ThemeData.light(),
       routes: {
         LoadingScreen.id: (context) => LoadingScreen(context: context),
