@@ -13,25 +13,29 @@ class SongDisplay extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(children: [
-          Container(
-            padding:
-                EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            child: ListView(children: [
-              Container(
-                color: Colors.white,
-                child: Padding(
+          PageView.builder(
+              controller: PageController(
+                  initialPage: Provider.of<SongData>(context).activeSong),
+              itemCount: Provider.of<SongData>(context).songs.length,
+              itemBuilder: (context, index) {
+                return Container(
                   padding: EdgeInsets.only(
-                      top: kToolbarBorderRadius + 8, left: 8, right: 8),
-                  child: Text(
-                    Provider.of<SongData>(context)
-                        .songs[Provider.of<SongData>(context).activeSong]
-                        .lyrics,
-                    style: kSongLyricsTextStyle,
-                  ),
-                ),
-              ),
-            ]),
-          ),
+                      top: kSongToolbarHeight - kToolbarBorderRadius),
+                  child: ListView(children: [
+                    Container(
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: kToolbarBorderRadius + 8, left: 8, right: 8),
+                        child: Text(
+                          Provider.of<SongData>(context).songs[index].lyrics,
+                          style: kSongLyricsTextStyle,
+                        ),
+                      ),
+                    ),
+                  ]),
+                );
+              }),
           SongToolbar(
             navigationIcon: Icons.arrow_back,
             onIconPressed: () {

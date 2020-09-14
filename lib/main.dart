@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/screens/loading_screen.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
       initialRoute: SongMenu.id,
       theme: ThemeData.light(),
       routes: {
-        LoadingScreen.id: (context) => LoadingScreen(context: context),
         SongMenu.id: (context) => SongMenu(),
         SongDisplay.id: (context) => SongDisplay(),
       },
