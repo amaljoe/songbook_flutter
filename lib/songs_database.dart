@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'package:songbook_flutter/song_item.dart';
+import 'file:///C:/Users/amalj/AndroidStudioProjects/songbook_flutter/lib/models/song_item.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main() async {
@@ -41,6 +41,7 @@ class SongsDatabase {
   }
 
   Future<List<SongItem>> getAllSongs() async {
+    print('getting all songs');
     final List<Map<String, dynamic>> maps = await _database.query('songs');
     return List.generate(maps.length, (index) {
       return SongItem(

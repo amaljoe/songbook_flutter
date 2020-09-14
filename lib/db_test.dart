@@ -87,19 +87,19 @@ void main() async {
     );
   }
 
-  Future<void> deleteDog(int id) async {
-    // Get a reference to the database.
-    final db = database;
-
-    // Remove the Dog from the database.
-    await db.delete(
-      'dogs',
-      // Use a `where` clause to delete a specific dog.
-      where: "id = ?",
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
-      whereArgs: [id],
-    );
-  }
+  // Future<void> deleteDog(int id) async {
+  //   // Get a reference to the database.
+  //   final db = database;
+  //
+  //   // Remove the Dog from the database.
+  //   await db.delete(
+  //     'dogs',
+  //     // Use a `where` clause to delete a specific dog.
+  //     where: "id = ?",
+  //     // Pass the Dog's id as a whereArg to prevent SQL injection.
+  //     whereArgs: [id],
+  //   );
+  // }
 
   var fido = Dog(
     id: 3,
