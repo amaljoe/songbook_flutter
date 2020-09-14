@@ -34,18 +34,18 @@ class _SongDisplayState extends State<SongDisplay> {
                         padding: EdgeInsets.only(
                             top: kSongToolbarHeight - kToolbarBorderRadius),
                         color: Colors.green,
-                        child: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: kToolbarBorderRadius + 8,
-                                left: 8,
-                                right: 8),
-                            child: Text(
-                              snapshot.data[widget.songNum].lyrics,
-                              style: kSongLyricsTextStyle,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: kToolbarBorderRadius + 8,
+                                  left: 8,
+                                  right: 8),
+                              child: Text(
+                                snapshot.data[widget.songNum].lyrics,
+                                style: kSongLyricsTextStyle,
+                              ),
                             ),
                           ),
                         ),
@@ -57,8 +57,7 @@ class _SongDisplayState extends State<SongDisplay> {
                         },
                         childHeader: Center(
                           child: SongItemWidget(
-                              songItem: snapshot.data[widget.songNum],
-                              onPressed: () {}),
+                              songItem: snapshot.data[widget.songNum]),
                         ),
                       ),
                     ]);

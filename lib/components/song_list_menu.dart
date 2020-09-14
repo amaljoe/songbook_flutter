@@ -35,9 +35,8 @@ class _SongListMenuState extends State<SongListMenu> {
                 }
                 return Padding(
                   padding: EdgeInsets.only(top: topPadding),
-                  child: SongItemWidget(
-                    songItem: snapshot.data[i],
-                    onPressed: () {
+                  child: GestureDetector(
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
@@ -45,6 +44,9 @@ class _SongListMenuState extends State<SongListMenu> {
                         }),
                       );
                     },
+                    child: SongItemWidget(
+                      songItem: snapshot.data[i],
+                    ),
                   ),
                 );
               },
