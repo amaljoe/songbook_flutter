@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/amalj/AndroidStudioProjects/songbook_flutter/lib/models/song_item.dart';
+import 'package:songbook_flutter/models/song_item.dart';
 import '../constants.dart';
 
 class SongItemWidget extends StatelessWidget {

@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'file:///C:/Users/amalj/AndroidStudioProjects/songbook_flutter/lib/models/song_item.dart';
 import 'package:sqflite/sqflite.dart';
+import 'models/song_item.dart';
 
 void main() async {
   SongsDatabase songsDatabase = SongsDatabase();

@@ -4,7 +4,7 @@ import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
-
+import 'package:songbook_flutter/models/song_item.dart';
 import '../constants.dart';
 
 class SongMenu extends StatelessWidget {
@@ -12,8 +12,10 @@ class SongMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('menu opened');
-    if (!Provider.of<SongData>(context, listen: false).songsLoaded) {
-      Provider.of<SongData>(context, listen: false).loadDatabase();
+    if (context.select<SongData, List<SongItem>>((value) => value.songs) ==
+        null) {
+      print('load block entered');
+      context.select<SongData, Future<void>>((value) => value.loadDatabase());
       return Scaffold(
         body: Container(
           child: Center(

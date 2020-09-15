@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'file:///C:/Users/amalj/AndroidStudioProjects/songbook_flutter/lib/models/song_item.dart';
+import 'package:flutter/foundation.dart';
 import 'package:songbook_flutter/songs_database.dart';
+import 'song_item.dart';
 
 class SongData extends ChangeNotifier {
   int activeSong;
-  bool songsLoaded = false;
   List<SongItem> songs;
 
   void openSong(int songNum) {
@@ -17,7 +16,6 @@ class SongData extends ChangeNotifier {
     await songsDatabase.openSongsDatabase();
     songs = await songsDatabase.getAllSongs();
     print('songs loaded');
-    songsLoaded = true;
     notifyListeners();
   }
 }

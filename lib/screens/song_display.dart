@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/models/song_data.dart';
+import 'package:songbook_flutter/models/song_item.dart';
 import '../components/song_item_widget.dart';
 
 class SongDisplay extends StatefulWidget {
@@ -22,13 +23,13 @@ class _SongDisplayState extends State<SongDisplay> {
           PageView.builder(
               onPageChanged: (index) {
                 print('actually $index');
-                Provider.of<SongData>(context, listen: false).openSong(index);
+                context.read<SongData>().openSong(index);
               },
               controller: PageController(
-                  initialPage:
-                      Provider.of<SongData>(context, listen: false).activeSong),
+                  initialPage: context
+                      .select<SongData, int>((value) => value.activeSong)),
               itemCount:
-                  Provider.of<SongData>(context, listen: false).songs.length,
+                  context.select<SongData, int>((value) => value.songs.length),
               itemBuilder: (context, index) {
                 return Container(
                   padding: EdgeInsets.only(
@@ -40,9 +41,7 @@ class _SongDisplayState extends State<SongDisplay> {
                         padding: EdgeInsets.only(
                             top: kToolbarBorderRadius + 8, left: 16, right: 16),
                         child: Text(
-                          Provider.of<SongData>(context, listen: false)
-                              .songs[index]
-                              .lyrics,
+                          context.read<SongData>().songs[index].lyrics,
                           style: kSongLyricsTextStyle,
                         ),
                       ),
@@ -59,8 +58,10 @@ class _SongDisplayState extends State<SongDisplay> {
               padding: EdgeInsets.only(left: 20, top: 10),
               child: Center(
                 child: SongItemWidget(
-                    songItem: Provider.of<SongData>(context, listen: false)
-                        .songs[Provider.of<SongData>(context).activeSong]),
+                    songItem: context.select<SongData, List<SongItem>>(
+                            (value) => value.songs)[
+                        context.select<SongData, int>(
+                            (value) => value.activeSong)]),
               ),
             ),
           ),

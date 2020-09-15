@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_item_widget.dart';
-import 'package:songbook_flutter/models/song_data.dart';
+import 'package:songbook_flutter/models/song_item.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
+import 'package:songbook_flutter/models/song_data.dart';
 import '../constants.dart';
 
 class SongListMenu extends StatelessWidget {
@@ -10,9 +11,9 @@ class SongListMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double topPadding;
     return ListView.builder(
-      itemCount: Provider.of<SongData>(context).songs.length,
-      itemBuilder: (context, i) {
-        if (i == 0) {
+      itemCount: context.select<SongData, int>((value) => value.songs.length),
+      itemBuilder: (context, index) {
+        if (index == 0) {
           topPadding = kToolbarBorderRadius;
         } else {
           topPadding = 0;
@@ -22,7 +23,7 @@ class SongListMenu extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               print('list pressed');
-              Provider.of<SongData>(context, listen: false).openSong(i);
+              context.read<SongData>().openSong(index);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
@@ -31,7 +32,7 @@ class SongListMenu extends StatelessWidget {
               );
             },
             child: SongItemWidget(
-              songItem: Provider.of<SongData>(context).songs[i],
+              songItem: context.read<SongData>().songs[index],
             ),
           ),
         );
