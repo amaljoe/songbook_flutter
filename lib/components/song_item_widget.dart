@@ -14,7 +14,7 @@ class SongItemWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 12.0,
-        vertical: 8.0,
+        vertical: 12.0,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

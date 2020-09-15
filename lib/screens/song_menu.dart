@@ -12,8 +12,8 @@ class SongMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('menu opened');
-    if (!Provider.of<SongData>(context).songsLoaded) {
-      Provider.of<SongData>(context).loadDatabase();
+    if (!Provider.of<SongData>(context, listen: false).songsLoaded) {
+      Provider.of<SongData>(context, listen: false).loadDatabase();
       return Scaffold(
         body: Container(
           child: Center(
