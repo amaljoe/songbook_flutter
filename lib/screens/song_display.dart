@@ -4,6 +4,7 @@ import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/models/song_item.dart';
+import 'package:songbook_flutter/screens/song_search.dart';
 import '../components/song_item_widget.dart';
 
 class SongDisplay extends StatefulWidget {
@@ -53,6 +54,9 @@ class _SongDisplayState extends State<SongDisplay> {
             navigationIcon: Icons.arrow_back,
             onIconPressed: () {
               Navigator.pop(context);
+            },
+            onSearchPressed: () {
+              Navigator.pushNamed(context, SongSearch.id);
             },
             childHeader: Padding(
               padding: EdgeInsets.only(left: 20, top: 10),

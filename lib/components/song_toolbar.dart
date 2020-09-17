@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:songbook_flutter/constants.dart';
 
 class SongToolbar extends StatelessWidget {
   final IconData navigationIcon;
   final Function onIconPressed;
   final Widget childHeader;
+  final Function onSearchPressed;
+
   SongToolbar({
     @required this.navigationIcon,
     @required this.onIconPressed,
     @required this.childHeader,
+    @required this.onSearchPressed,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,26 +44,10 @@ class SongToolbar extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(top: 8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(40.0),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          icon: Padding(
-                            padding: EdgeInsets.only(left: 12.0),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                            ),
-                          ),
-                          hintText: 'Search song title or number',
-                          border: InputBorder.none,
-                          hintStyle: kSearchTextStyle,
-                        ),
-                      ),
-                    ),
+                    child: SearchBar(
+                        onPressed: onSearchPressed,
+                        onTextChanged: (value) {},
+                        autoFocus: false),
                   ),
                 ),
                 SizedBox(

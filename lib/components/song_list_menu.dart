@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_item_widget.dart';
-import 'package:songbook_flutter/models/song_item.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import '../constants.dart';

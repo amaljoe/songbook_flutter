@@ -5,6 +5,7 @@ import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/models/song_item.dart';
+import 'package:songbook_flutter/screens/song_search.dart';
 import '../constants.dart';
 
 class SongMenu extends StatelessWidget {
@@ -40,6 +41,9 @@ class SongMenu extends StatelessWidget {
             ),
           ),
           SongToolbar(
+            onSearchPressed: () {
+              Navigator.pushNamed(context, SongSearch.id);
+            },
             navigationIcon: Icons.menu,
             onIconPressed: () {},
             childHeader: Center(

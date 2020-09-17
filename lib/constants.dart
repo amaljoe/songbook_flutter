@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 double kSongToolbarHeight = 150.0;
 double kToolbarBorderRadius = 30.0;
