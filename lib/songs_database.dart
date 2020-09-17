@@ -52,17 +52,16 @@ class SongsDatabase {
     });
   }
 
-  Future<SongItem> getSong(int num) async {
-    final List<Map<String, dynamic>> maps = await _database.query(
-      'songs',
-      where: 'songId = ?',
-      whereArgs: [num],
-    );
-    return SongItem(
-      songId: maps[0]['songId'],
-      title: maps[0]['title'],
-      titleEng: maps[0]['titleEng'],
-      lyrics: maps[0]['lyrics'],
-    );
+  Future<List<SongItem>> getSearchSongs(String searchText) async {
+    final List<Map<String, dynamic>> maps = await _database
+        .query('songs', where: 'titleEng like ?', whereArgs: ['%$searchText%']);
+    return List.generate(maps.length, (index) {
+      return SongItem(
+        songId: maps[index]['songId'],
+        title: maps[index]['title'],
+        titleEng: maps[index]['titleEng'],
+        lyrics: maps[index]['lyrics'],
+      );
+    });
   }
 }

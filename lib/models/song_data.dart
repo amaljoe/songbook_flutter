@@ -5,6 +5,14 @@ import 'song_item.dart';
 class SongData extends ChangeNotifier {
   int activeSong;
   List<SongItem> songs;
+  List<SongItem> searchSongs;
+  SongsDatabase songsDatabase = SongsDatabase();
+
+  void search(String searchText) async {
+    searchSongs = await songsDatabase.getSearchSongs(searchText);
+    print('search songs loaded');
+    notifyListeners();
+  }
 
   void openSong(int songNum) {
     activeSong = songNum;
@@ -12,7 +20,6 @@ class SongData extends ChangeNotifier {
   }
 
   Future<void> loadDatabase() async {
-    SongsDatabase songsDatabase = SongsDatabase();
     await songsDatabase.openSongsDatabase();
     songs = await songsDatabase.getAllSongs();
     print('songs loaded');
