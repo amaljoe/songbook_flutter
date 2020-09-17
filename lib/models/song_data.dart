@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:songbook_flutter/songs_database.dart';
 import 'song_item.dart';
+import 'package:string_validator/string_validator.dart';
 
 class SongData extends ChangeNotifier {
   int activeSong;
@@ -9,7 +10,11 @@ class SongData extends ChangeNotifier {
   SongsDatabase songsDatabase = SongsDatabase();
 
   void search(String searchText) async {
-    searchSongs = await songsDatabase.getSearchSongs(searchText);
+    if (isNumeric(searchText)) {
+      searchSongs = await songsDatabase.getSearchSongsByNum(searchText);
+    } else {
+      searchSongs = await songsDatabase.getSearchSongs(searchText);
+    }
     print('search songs loaded');
     notifyListeners();
   }

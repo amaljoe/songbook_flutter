@@ -53,8 +53,27 @@ class SongsDatabase {
   }
 
   Future<List<SongItem>> getSearchSongs(String searchText) async {
+    if (searchText == null || searchText == '') {
+      return [];
+    }
     final List<Map<String, dynamic>> maps = await _database
-        .query('songs', where: 'titleEng like ?', whereArgs: ['%$searchText%']);
+        .query('songs', where: 'titleEng like ?', whereArgs: ['$searchText%']);
+    return List.generate(maps.length, (index) {
+      return SongItem(
+        songId: maps[index]['songId'],
+        title: maps[index]['title'],
+        titleEng: maps[index]['titleEng'],
+        lyrics: maps[index]['lyrics'],
+      );
+    });
+  }
+
+  Future<List<SongItem>> getSearchSongsByNum(String searchText) async {
+    if (searchText == null || searchText == '') {
+      return [];
+    }
+    final List<Map<String, dynamic>> maps = await _database
+        .query('songs', where: 'songId like ?', whereArgs: ['$searchText%']);
     return List.generate(maps.length, (index) {
       return SongItem(
         songId: maps[index]['songId'],
