@@ -26,6 +26,4 @@ TextStyle kSongLyricsTextStyle = TextStyle(
   fontSize: 18,
 );
 
-TextStyle kHeaderTextStyle = GoogleFonts.pacifico(
-  fontSize: 32,
-);
+TextStyle kHeaderTextStyle = TextStyle(fontFamily: 'Pacifico', fontSize: 36);
