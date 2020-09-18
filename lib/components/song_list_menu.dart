@@ -23,12 +23,7 @@ class SongListMenu extends StatelessWidget {
             onTap: () {
               print('list pressed');
               context.read<SongData>().openSong(index);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return SongDisplay();
-                }),
-              );
+              Navigator.pushNamed(context, SongDisplay.id);
             },
             child: SongItemWidget(
               songItem: context.read<SongData>().songs[index],

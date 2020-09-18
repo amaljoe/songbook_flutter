@@ -5,6 +5,8 @@ import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_list_search.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/models/song_item.dart';
+import 'package:songbook_flutter/screens/song_display.dart';
+import 'package:string_validator/string_validator.dart';
 
 class SongSearch extends StatelessWidget {
   static const String id = 'song_search';
@@ -34,7 +36,15 @@ class SongSearch extends StatelessWidget {
                         onPressed: () {},
                         onTextChanged: (String searchText) {
                           print(searchText);
-                          context.read<SongData>().search(searchText);
+                          if (isNumeric(searchText) && searchText.length == 3) {
+                            print('3 got');
+                            context
+                                .read<SongData>()
+                                .openSong(searchText as int);
+                            Navigator.pushNamed(context, SongDisplay.id);
+                          } else {
+                            context.read<SongData>().search(searchText);
+                          }
                         },
                         autoFocus: true,
                       ),
