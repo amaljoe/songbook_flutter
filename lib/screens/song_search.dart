@@ -56,7 +56,12 @@ class SongSearch extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                child: SongListSearch(),
+                child: SongListSearch(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, SongDisplay.id, (route) => false);
+                  },
+                ),
               ),
             )
           ],

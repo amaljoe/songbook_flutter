@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_item_widget.dart';
 import 'package:songbook_flutter/models/song_item.dart';
-import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/models/song_data.dart';
-import 'package:songbook_flutter/screens/song_menu.dart';
 import '../constants.dart';
 
 class SongListSearch extends StatelessWidget {
+  final Function onPressed;
+  SongListSearch({@required this.onPressed});
   @override
   Widget build(BuildContext context) {
     double topPadding;
@@ -34,8 +34,9 @@ class SongListSearch extends StatelessWidget {
               context.read<SongData>().openSong(
                   context.read<SongData>().searchSongs[index].songId -
                       kStarting);
-              Navigator.pushNamedAndRemoveUntil(
-                  context, SongDisplay.id, ModalRoute.withName(SongMenu.id));
+              onPressed();
+              // Navigator.pushNamedAndRemoveUntil(
+              //     context, SongDisplay.id, ModalRoute.withName(SongMenu.id));
             },
             child: SongItemWidget(
               songItem: context.read<SongData>().searchSongs[index],
