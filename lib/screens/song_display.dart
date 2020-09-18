@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:songbook_flutter/constants.dart';
-import 'package:songbook_flutter/components/song_toolbar.dart';
-import 'package:songbook_flutter/models/song_data.dart';
-import 'package:songbook_flutter/models/song_item.dart';
-import 'package:songbook_flutter/screens/song_search.dart';
-import '../components/song_item_widget.dart';
+import 'package:songbook_flutter/components/song_display_toolbar.dart';
+import 'package:songbook_flutter/components/song_display_pager.dart';
 
 class SongDisplay extends StatefulWidget {
   static const String id = 'song_display';
@@ -21,54 +16,8 @@ class _SongDisplayState extends State<SongDisplay> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(children: [
-          PageView.builder(
-              onPageChanged: (index) {
-                print('actually $index');
-                context.read<SongData>().openSong(index);
-              },
-              controller: PageController(
-                  initialPage: context
-                      .select<SongData, int>((value) => value.activeSong)),
-              itemCount:
-                  context.select<SongData, int>((value) => value.songs.length),
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.only(
-                      top: kSongToolbarHeight - kToolbarBorderRadius),
-                  child: ListView(children: [
-                    Container(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: kToolbarBorderRadius + 8, left: 16, right: 16),
-                        child: Text(
-                          context.read<SongData>().songs[index].lyrics,
-                          style: kSongLyricsTextStyle,
-                        ),
-                      ),
-                    ),
-                  ]),
-                );
-              }),
-          SongToolbar(
-            navigationIcon: Icons.arrow_back,
-            onIconPressed: () {
-              Navigator.pop(context);
-            },
-            onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.id);
-            },
-            childHeader: Padding(
-              padding: EdgeInsets.only(left: 20, top: 10),
-              child: Center(
-                child: SongItemWidget(
-                    songItem: context.select<SongData, List<SongItem>>(
-                            (value) => value.songs)[
-                        context.select<SongData, int>(
-                            (value) => value.activeSong)]),
-              ),
-            ),
-          ),
+          SongDisplayPager(),
+          SongDisplayToolbar(),
         ]),
       ),
     );
