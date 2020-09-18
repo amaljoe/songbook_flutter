@@ -19,32 +19,40 @@ class MyApp extends StatelessWidget {
       initialRoute: SongMenu.id,
       theme: ThemeData.light(),
       onGenerateRoute: (settings) {
-        if (settings.name == SongDisplay.id) {
-          return PageRouteBuilder(
-            pageBuilder: (_, __, ___) {
-              return SongDisplay();
-            },
-            transitionDuration: Duration(seconds: 0),
-            transitionsBuilder: (_, animation, __, child) {
-              var begin = Offset(0.0, 1.0);
-              var end = Offset.zero;
-              var curve = Curves.ease;
-
-              var tween = Tween(begin: begin, end: end);
-              var curvedAnimation = CurvedAnimation(
-                parent: animation,
-                curve: curve,
-              );
-
-              return child;
-            },
-          );
+        switch (settings.name) {
+          case SongDisplay.id:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return SongDisplay();
+              },
+              transitionDuration: Duration(seconds: 0),
+              transitionsBuilder: (_, animation, __, child) => child,
+            );
+          case SongMenu.id:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return SongMenu();
+              },
+              transitionDuration: Duration(seconds: 0),
+              transitionsBuilder: (_, animation, __, child) => child,
+            );
+          case SongSearch.id:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return SongSearch();
+              },
+              transitionDuration: Duration(seconds: 0),
+              transitionsBuilder: (_, animation, __, child) => child,
+            );
+          default:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return SongMenu();
+              },
+              transitionDuration: Duration(seconds: 0),
+              transitionsBuilder: (_, animation, __, child) => child,
+            );
         }
-        return null;
-      },
-      routes: {
-        SongMenu.id: (context) => SongMenu(),
-        SongSearch.id: (context) => SongSearch(),
       },
     );
   }
