@@ -21,8 +21,10 @@ class SongListMenu extends StatelessWidget {
           padding: EdgeInsets.only(top: topPadding),
           child: GestureDetector(
             onTap: () {
-              print('list pressed');
-              context.read<SongData>().openSong(index);
+              print(
+                  'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
+              context.read<SongData>().openSong(
+                  context.read<SongData>().songs[index].songId - kStarting);
               Navigator.pushNamed(context, SongDisplay.id);
             },
             child: SongItemWidget(
