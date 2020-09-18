@@ -25,18 +25,18 @@ class _SongDisplayState extends State<SongDisplay>
     print('entering init of display');
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
     _tweenOffsetHorizontal =
         Tween<Offset>(begin: Offset(0.2, 0), end: Offset.zero);
     _tweenOffsetVertical =
         Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero);
     _offSetAnimationHorizontal = _tweenOffsetHorizontal.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.fastLinearToSlowEaseIn));
+        parent: _animationController, curve: Curves.elasticOut));
     _offSetAnimationVertical = _tweenOffsetVertical.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.fastLinearToSlowEaseIn));
+        parent: _animationController, curve: Curves.elasticOut));
     _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.fastLinearToSlowEaseIn));
+        parent: _animationController, curve: Curves.elasticOut));
     _animationController.forward();
   }
 

@@ -25,8 +25,16 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongDisplay();
               },
-              transitionDuration: Duration(seconds: 0),
-              transitionsBuilder: (_, animation, __, child) => child,
+              transitionDuration: Duration(milliseconds: 200),
+              transitionsBuilder: (_, animation, __, child) {
+                Animation<double> opacityAnimation =
+                    Tween<double>(begin: 0, end: 1).animate(
+                        CurvedAnimation(parent: animation, curve: Curves.ease));
+                return FadeTransition(
+                  opacity: opacityAnimation,
+                  child: child,
+                );
+              },
             );
           case SongMenu.id:
             return PageRouteBuilder(
