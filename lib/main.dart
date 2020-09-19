@@ -26,13 +26,25 @@ class MyApp extends StatelessWidget {
                 return SongDisplay();
               },
               transitionDuration: Duration(milliseconds: 200),
-              transitionsBuilder: (_, animation, __, child) {
-                Animation<double> opacityAnimation =
-                    Tween<double>(begin: 0, end: 1).animate(
-                        CurvedAnimation(parent: animation, curve: Curves.ease));
-                return FadeTransition(
-                  opacity: opacityAnimation,
-                  child: child,
+              transitionsBuilder: (_, animation, secondaryAnimation, child) {
+                // Animation<double> opacityAnimation =
+                //     Tween<double>(begin: 0, end: 1).animate(
+                //         CurvedAnimation(parent: animation, curve: Curves.ease));
+                // return FadeTransition(
+                //   opacity: opacityAnimation,
+                //   child: child,
+                // );
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(0.0, 1.0),
+                    end: Offset.zero,
+                  ).animate(CurvedAnimation(
+                      parent: animation, curve: Curves.easeOut)),
+                  child: FadeTransition(
+                      opacity: Tween<double>(begin: 0, end: 1).animate(
+                          CurvedAnimation(
+                              parent: animation, curve: Curves.ease)),
+                      child: child),
                 );
               },
             );

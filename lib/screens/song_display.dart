@@ -3,6 +3,7 @@ import 'package:songbook_flutter/components/song_display_pager.dart';
 import 'package:songbook_flutter/components/song_title_header.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
+import 'package:wakelock/wakelock.dart';
 
 class SongDisplay extends StatefulWidget {
   static const String id = 'song_display/';
@@ -22,13 +23,14 @@ class _SongDisplayState extends State<SongDisplay>
   Animation<Offset> _offSetAnimationVertical;
   @override
   void initState() {
-    print('entering init of display');
+    print('enabling wakelock and animation controllers');
     super.initState();
+    Wakelock.enable();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
     _tweenOffsetHorizontal =
-        Tween<Offset>(begin: Offset(0.2, 0), end: Offset.zero);
+        Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
     _tweenOffsetVertical =
         Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero);
     _offSetAnimationHorizontal = _tweenOffsetHorizontal.animate(CurvedAnimation(
@@ -41,9 +43,17 @@ class _SongDisplayState extends State<SongDisplay>
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+    Wakelock.disable();
+    print('wakelock disabled');
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _animationController.dispose();
+    print('animation disposed');
   }
 
   @override

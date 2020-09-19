@@ -34,8 +34,9 @@ class SongListSearch extends StatelessWidget {
               context.read<SongData>().openSong(
                   context.read<SongData>().searchSongs[index].songId -
                       kStarting);
-              Navigator.pushNamedAndRemoveUntil(
-                  context, SongDisplay.id, ModalRoute.withName(SongMenu.id));
+              Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
+                  (Route<dynamic> route) => route.isFirst ? true : false);
+              // Navigator.replaceRouteBelow(context, anchorRoute: SongMenu.id);
               // Navigator.pushNamedAndRemoveUntil(
               //     context, SongDisplay.id, ModalRoute.withName(SongMenu.id));
             },
