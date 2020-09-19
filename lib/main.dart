@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongDisplay();
               },
-              transitionDuration: Duration(milliseconds: 200),
+              transitionDuration: Duration(milliseconds: 300),
               transitionsBuilder: (_, animation, secondaryAnimation, child) {
                 // Animation<double> opacityAnimation =
                 //     Tween<double>(begin: 0, end: 1).animate(
@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
                   position: Tween<Offset>(
                     begin: Offset(0.0, 1.0),
                     end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                      parent: animation, curve: Curves.easeOut)),
+                  ).animate(
+                      CurvedAnimation(parent: animation, curve: Curves.ease)),
                   child: FadeTransition(
                       opacity: Tween<double>(begin: 0, end: 1).animate(
                           CurvedAnimation(

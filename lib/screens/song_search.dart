@@ -36,7 +36,6 @@ class SongSearch extends StatelessWidget {
                         onTextChanged: (String searchText) {
                           if (isNumeric(searchText) && searchText.length == 3) {
                             int songNum = int.parse(searchText);
-                            context.read<SongData>().search(searchText);
                             context
                                 .read<SongData>()
                                 .openSong(songNum - kStarting);
