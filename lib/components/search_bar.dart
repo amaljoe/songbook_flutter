@@ -26,6 +26,7 @@ class SearchBar extends StatelessWidget {
           onChanged: onTextChanged,
           autofocus: autoFocus,
           enabled: autoFocus,
+          keyboardType: TextInputType.visiblePassword,
           decoration: InputDecoration(
             icon: Padding(
               padding: EdgeInsets.only(left: 12.0),
