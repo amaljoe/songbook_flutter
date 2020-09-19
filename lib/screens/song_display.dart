@@ -17,28 +17,27 @@ class _SongDisplayState extends State<SongDisplay>
   AnimationController _animationController;
   Tween<double> _tweenOpacity;
   Animation<double> _opacityAnimation;
-  Tween<Offset> _tweenOffsetHorizontal;
-  Tween<Offset> _tweenOffsetVertical;
-  Animation<Offset> _offSetAnimationHorizontal;
-  Animation<Offset> _offSetAnimationVertical;
+  Tween<Offset> _tweenOffsetLyrics;
+  Tween<Offset> _tweenOffsetToolbar;
+  Animation<Offset> _offSetAnimationLyrics;
+  Animation<Offset> _offSetAnimationToolbar;
   @override
   void initState() {
     print('enabling wakelock and animation controllers');
     super.initState();
     Wakelock.enable();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 600));
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
-    _tweenOffsetHorizontal =
-        Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
-    _tweenOffsetVertical =
+    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
+    _tweenOffsetToolbar =
         Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero);
-    _offSetAnimationHorizontal = _tweenOffsetHorizontal.animate(CurvedAnimation(
+    _offSetAnimationLyrics = _tweenOffsetLyrics.animate(CurvedAnimation(
         parent: _animationController, curve: Curves.elasticOut));
-    _offSetAnimationVertical = _tweenOffsetVertical.animate(CurvedAnimation(
+    _offSetAnimationToolbar = _tweenOffsetToolbar.animate(CurvedAnimation(
         parent: _animationController, curve: Curves.elasticOut));
     _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.elasticOut));
+        parent: _animationController, curve: Curves.easeOutCubic));
     _animationController.forward();
   }
 
@@ -64,14 +63,14 @@ class _SongDisplayState extends State<SongDisplay>
       body: SafeArea(
         child: Stack(children: [
           SlideTransition(
-            position: _offSetAnimationHorizontal,
+            position: _offSetAnimationLyrics,
             child: FadeTransition(
               opacity: _opacityAnimation,
               child: SongDisplayPager(),
             ),
           ),
           SlideTransition(
-              position: _offSetAnimationVertical,
+              position: _offSetAnimationToolbar,
               child: SongToolbar(
                 navigationIcon: Icons.arrow_back,
                 onIconPressed: () {

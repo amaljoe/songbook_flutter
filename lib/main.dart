@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                   child: FadeTransition(
                       opacity: Tween<double>(begin: 0, end: 1).animate(
                           CurvedAnimation(
-                              parent: animation, curve: Curves.ease)),
+                              parent: animation, curve: Curves.fastOutSlowIn)),
                       child: child),
                 );
               },
