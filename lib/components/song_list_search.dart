@@ -4,7 +4,6 @@ import 'package:songbook_flutter/components/song_item_widget.dart';
 import 'package:songbook_flutter/models/song_item.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
-import 'package:songbook_flutter/screens/song_menu.dart';
 import '../constants.dart';
 
 class SongListSearch extends StatelessWidget {
@@ -36,9 +35,6 @@ class SongListSearch extends StatelessWidget {
                       kStarting);
               Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
                   (Route<dynamic> route) => route.isFirst ? true : false);
-              // Navigator.replaceRouteBelow(context, anchorRoute: SongMenu.id);
-              // Navigator.pushNamedAndRemoveUntil(
-              //     context, SongDisplay.id, ModalRoute.withName(SongMenu.id));
             },
             child: SongItemWidget(
               songItem: context.read<SongData>().searchSongs[index],

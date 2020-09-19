@@ -36,10 +36,15 @@ class SongSearch extends StatelessWidget {
                           print(searchText);
                           if (isNumeric(searchText) && searchText.length == 3) {
                             print('3 got');
+                            context.read<SongData>().search(searchText);
                             context
                                 .read<SongData>()
                                 .openSong(searchText as int);
-                            Navigator.pushNamed(context, SongDisplay.id);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                SongDisplay.id,
+                                (Route<dynamic> route) =>
+                                    route.isFirst ? true : false);
                           } else {
                             context.read<SongData>().search(searchText);
                           }
