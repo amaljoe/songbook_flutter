@@ -21,8 +21,12 @@ class SongData extends ChangeNotifier {
   }
 
   void openSong(int songNum) {
-    searchSongs = [];
     activeSong = songNum;
+    notifyListeners();
+  }
+
+  void clearSearch() {
+    searchSongs = [];
     notifyListeners();
   }
 

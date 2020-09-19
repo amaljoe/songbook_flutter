@@ -35,6 +35,7 @@ class SongListSearch extends StatelessWidget {
                       kStarting);
               Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
                   (Route<dynamic> route) => route.isFirst ? true : false);
+              context.read<SongData>().clearSearch();
             },
             child: SongItemWidget(
               songItem: context.read<SongData>().searchSongs[index],
