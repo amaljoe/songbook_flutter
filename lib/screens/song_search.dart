@@ -7,8 +7,25 @@ import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:string_validator/string_validator.dart';
 
-class SongSearch extends StatelessWidget {
+class SongSearch extends StatefulWidget {
   static const String id = 'song_search';
+
+  @override
+  _SongSearchState createState() => _SongSearchState();
+}
+
+class _SongSearchState extends State<SongSearch>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller.reverse(from: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +36,10 @@ class SongSearch extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back),
+                    icon: AnimatedIcon(
+                      icon: AnimatedIcons.arrow_menu,
+                      progress: _controller,
+                    ),
                     iconSize: 30.0,
                     onPressed: () {
                       Navigator.pop(context);
