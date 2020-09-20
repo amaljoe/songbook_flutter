@@ -56,10 +56,22 @@ class MyApp extends StatelessWidget {
               transitionDuration: Duration(seconds: 0),
               transitionsBuilder: (_, animation, __, child) => child,
             );
+          case SongSearch.idFromHome:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return SongSearch(
+                  fromHome: true,
+                );
+              },
+              transitionDuration: Duration(seconds: 0),
+              transitionsBuilder: (_, animation, __, child) => child,
+            );
           case SongSearch.id:
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) {
-                return SongSearch();
+                return SongSearch(
+                  fromHome: false,
+                );
               },
               transitionDuration: Duration(seconds: 0),
               transitionsBuilder: (_, animation, __, child) => child,

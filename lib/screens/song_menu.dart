@@ -42,7 +42,7 @@ class SongMenu extends StatelessWidget {
           ),
           SongToolbar(
             onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.id);
+              Navigator.pushNamed(context, SongSearch.idFromHome);
             },
             navigationIcon: Icons.menu,
             onIconPressed: () {},

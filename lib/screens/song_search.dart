@@ -8,8 +8,10 @@ import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:string_validator/string_validator.dart';
 
 class SongSearch extends StatefulWidget {
+  final bool fromHome;
+  static const String idFromHome = 'song_search_home';
   static const String id = 'song_search';
-
+  SongSearch({@required this.fromHome});
   @override
   _SongSearchState createState() => _SongSearchState();
 }
@@ -21,8 +23,9 @@ class _SongSearchState extends State<SongSearch>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: widget.fromHome ? 300 : 0));
     _controller.reverse(from: 1);
   }
 
