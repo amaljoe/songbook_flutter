@@ -27,17 +27,17 @@ class _SongDisplayState extends State<SongDisplay>
     super.initState();
     Wakelock.enable();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 600));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 550));
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
     _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
     _tweenOffsetToolbar =
         Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero);
     _offSetAnimationLyrics = _tweenOffsetLyrics.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.elasticOut));
+        parent: _animationController, curve: ElasticOutCurve(1)));
     _offSetAnimationToolbar = _tweenOffsetToolbar.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.elasticOut));
+        parent: _animationController, curve: ElasticOutCurve(1)));
     _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.easeOutCubic));
+        parent: _animationController, curve: ElasticOutCurve(1)));
     _animationController.forward();
   }
 
