@@ -7,8 +7,11 @@ class SongData extends ChangeNotifier {
   int activeSong;
   List<SongItem> songs;
   List<SongItem> searchSongs;
-  SongsDatabase songsDatabase = SongsDatabase();
+  SongsDatabase songsDatabase;
 
+  SongData() {
+    songsDatabase = SongsDatabase();
+  }
   //will
   void search(String searchText) async {
     if (isNumeric(searchText)) {
