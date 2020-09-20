@@ -17,7 +17,7 @@ class SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(),
+        border: Border.all(width: 2),
         borderRadius: BorderRadius.circular(40.0),
       ),
       child: GestureDetector(
