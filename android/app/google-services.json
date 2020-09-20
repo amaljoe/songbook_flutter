@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "186591541784",
+    "firebase_url": "https://songbook-79c66.firebaseio.com",
+    "project_id": "songbook-79c66",
+    "storage_bucket": "songbook-79c66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186591541784:android:90230975268be1416b616d",
+        "android_client_info": {
+          "package_name": "com.amaljoe.songbook_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186591541784-373fgeeitn2sv0n2sgh6614g02esd8e1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amaljoe.songbook_flutter",
+            "certificate_hash": "faa280ed4309ed8162faa546074d5b1e9b7db648"
+          }
+        },
+        {
+          "client_id": "186591541784-i5rfsa0l1ilhg8g68i2pqutr20vuvn56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzVYJ9JqUhgvD_fN8CeXCFYp8ancAk9KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186591541784-i5rfsa0l1ilhg8g68i2pqutr20vuvn56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
