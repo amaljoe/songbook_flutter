@@ -31,7 +31,7 @@ class _SongDisplayState extends State<SongDisplay>
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
     _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
     _tweenOffsetToolbar =
-        Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero);
+        Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero);
     _offSetAnimationLyrics = _tweenOffsetLyrics.animate(CurvedAnimation(
         parent: _animationController, curve: ElasticOutCurve(1)));
     _offSetAnimationToolbar = _tweenOffsetToolbar.animate(CurvedAnimation(
