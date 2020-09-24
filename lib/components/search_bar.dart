@@ -15,30 +15,37 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.5),
-        borderRadius: BorderRadius.circular(40.0),
-      ),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: TextField(
-          onChanged: onTextChanged,
-          autofocus: autoFocus,
-          enabled: autoFocus,
-          keyboardType: TextInputType.visiblePassword,
-          decoration: InputDecoration(
-            icon: Padding(
-              padding: EdgeInsets.only(left: 12.0),
-              child: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-            ),
-            hintText: 'Search song title or number',
-            border: InputBorder.none,
-            hintStyle: kSearchTextStyle,
+    return GestureDetector(
+      onTap: onPressed,
+      child: TextField(
+        onChanged: onTextChanged,
+        autofocus: autoFocus,
+        enabled: autoFocus,
+        keyboardType: TextInputType.visiblePassword,
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.black,
           ),
+          hintText: 'Search song title or number',
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          contentPadding: EdgeInsets.all(8),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          hintStyle: kSearchTextStyle,
         ),
       ),
     );

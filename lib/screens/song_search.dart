@@ -23,7 +23,6 @@ class _SongSearchState extends State<SongSearch>
   @override
   void initState() {
     super.initState();
-    context.read<SongData>().clearSearch();
     _controller = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: widget.fromHome ? 300 : 0));

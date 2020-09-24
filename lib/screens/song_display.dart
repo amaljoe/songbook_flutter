@@ -15,35 +15,27 @@ class SongDisplay extends StatefulWidget {
 class _SongDisplayState extends State<SongDisplay>
     with TickerProviderStateMixin {
   AnimationController _animationController;
-  Tween<double> _tweenOpacity;
-  Animation<double> _opacityAnimation;
   Tween<Offset> _tweenOffsetLyrics;
   Tween<Offset> _tweenOffsetToolbar;
   Animation<Offset> _offSetAnimationLyrics;
   Animation<Offset> _offSetAnimationToolbar;
-  Curve _curve = Curves.easeOutCubic;
-  AnimationController _controller;
+  Curve _curve = ElasticOutCurve(0.7);
 
   @override
   void initState() {
     print('enabling wakelock and animation controllers');
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     Wakelock.enable();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _tweenOpacity = Tween<double>(begin: 0, end: 1);
-    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(1, 0), end: Offset.zero);
-    _tweenOffsetToolbar = Tween<Offset>(begin: Offset(0, -1), end: Offset.zero);
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0.4, 0), end: Offset.zero);
+    _tweenOffsetToolbar =
+        Tween<Offset>(begin: Offset(0, -0.7), end: Offset.zero);
     _offSetAnimationLyrics = _tweenOffsetLyrics
         .animate(CurvedAnimation(parent: _animationController, curve: _curve));
     _offSetAnimationToolbar = _tweenOffsetToolbar
         .animate(CurvedAnimation(parent: _animationController, curve: _curve));
-    _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.easeOutExpo));
     _animationController.forward();
-    _controller.reverse(from: 1);
   }
 
   @override
@@ -69,18 +61,12 @@ class _SongDisplayState extends State<SongDisplay>
         child: Stack(children: [
           SlideTransition(
             position: _offSetAnimationLyrics,
-            child: FadeTransition(
-              opacity: _opacityAnimation,
-              child: SongDisplayPager(),
-            ),
+            child: SongDisplayPager(),
           ),
           SlideTransition(
             position: _offSetAnimationToolbar,
             child: SongToolbar(
-              navigationIcon: AnimatedIcon(
-                icon: AnimatedIcons.arrow_menu,
-                progress: _controller,
-              ),
+              navigationIcon: Icon(Icons.arrow_back),
               onIconPressed: () {
                 Navigator.pop(context);
               },

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongDisplay();
               },
-              transitionDuration: Duration(milliseconds: 400),
+              transitionDuration: Duration(milliseconds: 300),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return Stack(

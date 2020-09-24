@@ -85,7 +85,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
             childHeader: Center(
               child: Text(
                 'Songbook',
-                style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
+                style: kHeaderTextStyle,
               ),
             ),
           ),

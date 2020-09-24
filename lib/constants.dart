@@ -12,7 +12,7 @@ TextStyle kSearchTextStyle = TextStyle(
 
 TextStyle kSongItemNumTextStyle = TextStyle(
   fontFamily: 'roboto',
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w800,
   fontSize: 32,
 );
 
@@ -27,3 +27,6 @@ TextStyle kSongLyricsTextStyle = TextStyle(
 );
 
 TextStyle kHeaderTextStyle = TextStyle(fontFamily: 'Pacifico', fontSize: 36);
+
+TextStyle kWelcomeHeaderTextStyle =
+    TextStyle(fontFamily: 'Pacifico', fontSize: 44);

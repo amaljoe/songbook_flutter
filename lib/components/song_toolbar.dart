@@ -3,7 +3,7 @@ import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:songbook_flutter/constants.dart';
 
 class SongToolbar extends StatelessWidget {
-  final AnimatedIcon navigationIcon;
+  final navigationIcon;
   final Function onIconPressed;
   final Widget childHeader;
   final Function onSearchPressed;

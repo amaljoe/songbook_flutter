@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
@@ -35,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Center(
           child: Text(
             'Songbook',
-            style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
+            style: kWelcomeHeaderTextStyle,
           ),
         ),
       ),
