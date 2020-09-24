@@ -55,8 +55,14 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongMenu();
               },
-              transitionDuration: Duration(seconds: 0),
-              transitionsBuilder: (_, animation, __, child) => child,
+              transitionDuration: Duration(milliseconds: 500),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(
+                  opacity:
+                      CurvedAnimation(parent: animation, curve: Curves.ease),
+                  child: child,
+                );
+              },
             );
           case SongSearch.idFromHome:
             return PageRouteBuilder(

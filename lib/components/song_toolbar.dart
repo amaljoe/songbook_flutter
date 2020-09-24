@@ -60,9 +60,7 @@ class SongToolbar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: childHeader,
-                ),
+                Expanded(child: childHeader),
               ],
             ),
           ),

@@ -4,45 +4,48 @@ import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
 
-class WelcomeScreen extends StatelessWidget {
+import '../constants.dart';
+
+class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool showSpinner = true;
 
   Future<void> loading(BuildContext context) async {
     print('entered main loading');
     await Firebase.initializeApp();
     await context.read<SongData>().loadDatabase();
     print('exiting main loading');
-    return;
+    Navigator.pushReplacementNamed(context, SongMenu.id);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loading(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: loading(context),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print('failure');
-            return Container(
-              child: Center(child: Text('error')),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            print('success');
-            return Container(
-              color: Colors.white,
-              child: Center(
-                child: Text('success'),
+      body: Container(
+        child: Center(
+          child: Hero(
+            tag: 'title',
+            child: Material(
+              color: Colors.transparent,
+              child: Text(
+                'Songbook',
+                style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
               ),
-            );
-          } else {
-            print('loading');
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
+            ),
+          ),
+        ),
       ),
     );
   }

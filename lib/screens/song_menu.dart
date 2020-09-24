@@ -28,13 +28,14 @@ class SongMenu extends StatelessWidget {
         ),
       );
     }
+    print('no load block in menu');
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
           Container(
             padding:
                 EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            color: Colors.green,
+            color: Colors.white,
             child: Container(
               color: Colors.white,
               child: SongListMenu(),
@@ -47,9 +48,15 @@ class SongMenu extends StatelessWidget {
             navigationIcon: Icons.menu,
             onIconPressed: () {},
             childHeader: Center(
-              child: Text(
-                'Songbook',
-                style: kHeaderTextStyle,
+              child: Hero(
+                tag: 'title',
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    'Songbook',
+                    style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
+                  ),
+                ),
               ),
             ),
           ),
