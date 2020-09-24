@@ -23,10 +23,19 @@ class _SongSearchState extends State<SongSearch>
   @override
   void initState() {
     super.initState();
+    context.read<SongData>().clearSearch();
     _controller = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: widget.fromHome ? 300 : 0));
     _controller.reverse(from: 1);
+  }
+
+  void gotoSong(int index) async {
+    index -= kStarting;
+    print('item $index pressed');
+    context.read<SongData>().openSong(index);
+    await Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
+        (Route<dynamic> route) => route.isFirst ? true : false);
   }
 
   @override
@@ -56,18 +65,12 @@ class _SongSearchState extends State<SongSearch>
                       padding: EdgeInsets.only(top: 8.0),
                       child: SearchBar(
                         onPressed: () {},
-                        onTextChanged: (String searchText) {
+                        onTextChanged: (String searchText) async {
                           if (isNumeric(searchText) && searchText.length == 3) {
-                            int songNum = int.parse(searchText);
-                            context
-                                .read<SongData>()
-                                .openSong(songNum - kStarting);
-                            Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                SongDisplay.id,
-                                (Route<dynamic> route) =>
-                                    route.isFirst ? true : false);
-                            context.read<SongData>().clearSearch();
+                            print('3 are here');
+                            int num = int.parse(searchText);
+                            gotoSong(num);
+                            print('3 are here for sure');
                           } else {
                             context.read<SongData>().search(searchText);
                           }
@@ -84,7 +87,12 @@ class _SongSearchState extends State<SongSearch>
             ),
             Expanded(
               child: Container(
-                child: SongListSearch(),
+                child: SongListSearch(
+                  onPressed: (index) {
+                    gotoSong(
+                        context.read<SongData>().searchSongs[index].songId);
+                  },
+                ),
               ),
             )
           ],

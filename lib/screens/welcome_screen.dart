@@ -4,8 +4,6 @@ import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
 
-import '../constants.dart';
-
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
 

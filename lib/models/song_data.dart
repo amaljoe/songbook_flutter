@@ -29,6 +29,7 @@ class SongData extends ChangeNotifier {
   }
 
   void clearSearch() {
+    print('clearing search');
     searchSongs = [];
     notifyListeners();
   }

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongDisplay();
               },
-              transitionDuration: Duration(milliseconds: 300),
+              transitionDuration: Duration(milliseconds: 400),
               transitionsBuilder: (_, animation, secondaryAnimation, child) {
                 return FadeTransition(
                     opacity: Tween<double>(begin: 0, end: 1).animate(
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
                   fromHome: false,
                 );
               },
-              transitionDuration: Duration(seconds: 4),
+              transitionDuration: Duration(seconds: 0),
               transitionsBuilder: (_, animation, __, child) => child,
             );
           default:
