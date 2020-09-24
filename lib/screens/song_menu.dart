@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
@@ -15,16 +16,18 @@ class SongMenu extends StatefulWidget {
   _SongMenuState createState() => _SongMenuState();
 }
 
-class _SongMenuState extends State<SongMenu>
-    with SingleTickerProviderStateMixin {
+class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
   AnimationController _controller;
+  AnimationController animation;
+  bool allowNavigation = true;
 
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _controller.value = 1;
+    animation =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 300), value: 1);
   }
 
   @override
@@ -44,10 +47,23 @@ class _SongMenuState extends State<SongMenu>
                       'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
                   context.read<SongData>().openSong(
                       context.read<SongData>().songs[index].songId - kStarting);
-                  Navigator.pushNamed(context, SongDisplay.id).then((value) {
-                    _controller.value = 0;
-                    _controller.forward();
-                  });
+                  animation.forward();
+                  animation.addStatusListener(
+                    (status) {
+                      if (status == AnimationStatus.completed &&
+                          allowNavigation) {
+                        allowNavigation = false;
+                        Navigator.pushNamed(context, SongDisplay.id).then(
+                          (value) {
+                            allowNavigation = true;
+                            animation.value = 0;
+                            _controller.value = 0;
+                            _controller.forward();
+                          },
+                        );
+                      }
+                    },
+                  );
                 },
               ),
             ),
@@ -67,15 +83,22 @@ class _SongMenuState extends State<SongMenu>
             ),
             onIconPressed: () {},
             childHeader: Center(
-              child: Hero(
-                tag: 'title',
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text(
-                    'Songbook',
-                    style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
-                  ),
-                ),
+              child: Text(
+                'Songbook',
+                style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
+              ),
+            ),
+          ),
+          ScaleTransition(
+            scale: Tween<double>(begin: 0, end: 3).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeIn)),
+            child: FadeTransition(
+              opacity: Tween<double>(begin: 0, end: 1).animate(
+                  CurvedAnimation(parent: animation, curve: Curves.easeIn)),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
               ),
             ),
           ),

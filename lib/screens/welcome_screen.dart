@@ -33,15 +33,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Hero(
-            tag: 'title',
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                'Songbook',
-                style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
-              ),
-            ),
+          child: Text(
+            'Songbook',
+            style: TextStyle(fontFamily: 'Pacifico', fontSize: 36),
           ),
         ),
       ),

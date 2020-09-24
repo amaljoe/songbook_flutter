@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
@@ -27,12 +28,17 @@ class MyApp extends StatelessWidget {
                 return SongDisplay();
               },
               transitionDuration: Duration(milliseconds: 400),
-              transitionsBuilder: (_, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                    opacity: Tween<double>(begin: 0, end: 1).animate(
-                        CurvedAnimation(
-                            parent: animation, curve: Curves.easeOutCubic)),
-                    child: child);
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return Stack(
+                  children: [
+                    FadeTransition(
+                        opacity: Tween<double>(begin: 0, end: 1).animate(
+                            CurvedAnimation(
+                                parent: animation, curve: Curves.easeOutCubic)),
+                        child: child),
+                  ],
+                );
               },
             );
           case WelcomeScreen.id:
