@@ -28,18 +28,11 @@ class MyApp extends StatelessWidget {
               },
               transitionDuration: Duration(milliseconds: 300),
               transitionsBuilder: (_, animation, secondaryAnimation, child) {
-                return SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(0.0, 1.0),
-                    end: Offset.zero,
-                  ).animate(
-                      CurvedAnimation(parent: animation, curve: Curves.ease)),
-                  child: FadeTransition(
-                      opacity: Tween<double>(begin: 0, end: 1).animate(
-                          CurvedAnimation(
-                              parent: animation, curve: Curves.easeInExpo)),
-                      child: child),
-                );
+                return FadeTransition(
+                    opacity: Tween<double>(begin: 0, end: 1).animate(
+                        CurvedAnimation(
+                            parent: animation, curve: Curves.easeOutCubic)),
+                    child: child);
               },
             );
           case WelcomeScreen.id:

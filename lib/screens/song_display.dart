@@ -18,26 +18,22 @@ class _SongDisplayState extends State<SongDisplay>
   Tween<double> _tweenOpacity;
   Animation<double> _opacityAnimation;
   Tween<Offset> _tweenOffsetLyrics;
-  Tween<Offset> _tweenOffsetToolbar;
   Animation<Offset> _offSetAnimationLyrics;
   Animation<Offset> _offSetAnimationToolbar;
+  Curve _curve = Curves.easeOutCubic;
   @override
   void initState() {
     print('enabling wakelock and animation controllers');
     super.initState();
     Wakelock.enable();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 550));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _tweenOpacity = Tween<double>(begin: 0, end: 1);
-    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero);
-    _tweenOffsetToolbar =
-        Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero);
-    _offSetAnimationLyrics = _tweenOffsetLyrics.animate(CurvedAnimation(
-        parent: _animationController, curve: ElasticOutCurve(1)));
-    _offSetAnimationToolbar = _tweenOffsetToolbar.animate(CurvedAnimation(
-        parent: _animationController, curve: ElasticOutCurve(1)));
+    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0, 1), end: Offset.zero);
+    _offSetAnimationLyrics = _tweenOffsetLyrics
+        .animate(CurvedAnimation(parent: _animationController, curve: _curve));
     _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
-        parent: _animationController, curve: ElasticOutCurve(1)));
+        parent: _animationController, curve: Curves.easeOutExpo));
     _animationController.forward();
   }
 
@@ -69,18 +65,16 @@ class _SongDisplayState extends State<SongDisplay>
               child: SongDisplayPager(),
             ),
           ),
-          SlideTransition(
-              position: _offSetAnimationToolbar,
-              child: SongToolbar(
-                navigationIcon: Icons.arrow_back,
-                onIconPressed: () {
-                  Navigator.pop(context);
-                },
-                onSearchPressed: () {
-                  Navigator.pushNamed(context, SongSearch.id);
-                },
-                childHeader: SongTitleHeader(),
-              )),
+          SongToolbar(
+            navigationIcon: Icons.arrow_back,
+            onIconPressed: () {
+              Navigator.pop(context);
+            },
+            onSearchPressed: () {
+              Navigator.pushNamed(context, SongSearch.id);
+            },
+            childHeader: SongTitleHeader(),
+          ),
         ]),
       ),
     );

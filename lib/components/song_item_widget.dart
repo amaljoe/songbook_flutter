@@ -11,29 +11,35 @@ class SongItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 12.0,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            songItem.songId.toString(),
-            style: kSongItemNumTextStyle,
+    return Hero(
+      tag: songItem.songId,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 12.0,
+            vertical: 12.0,
           ),
-          SizedBox(
-            width: 15,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                songItem.songId.toString(),
+                style: kSongItemNumTextStyle,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Text(
+                  songItem.title.toString(),
+                  style: kSongItemTitleTextStyle,
+                  maxLines: 2,
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Text(
-              songItem.title.toString(),
-              style: kSongItemTitleTextStyle,
-              maxLines: 2,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
