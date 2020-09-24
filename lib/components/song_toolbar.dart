@@ -3,7 +3,7 @@ import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:songbook_flutter/constants.dart';
 
 class SongToolbar extends StatelessWidget {
-  final IconData navigationIcon;
+  final AnimatedIcon navigationIcon;
   final Function onIconPressed;
   final Widget childHeader;
   final Function onSearchPressed;
@@ -34,7 +34,7 @@ class SongToolbar extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(navigationIcon),
+                  icon: navigationIcon,
                   iconSize: 30.0,
                   onPressed: onIconPressed,
                 ),

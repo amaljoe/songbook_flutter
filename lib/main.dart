@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return SongMenu();
               },
-              transitionDuration: Duration(milliseconds: 500),
+              transitionDuration: Duration(milliseconds: 400),
               transitionsBuilder: (_, animation, __, child) {
                 return FadeTransition(
                   opacity:
@@ -74,13 +74,13 @@ class MyApp extends StatelessWidget {
                   fromHome: false,
                 );
               },
-              transitionDuration: Duration(seconds: 0),
+              transitionDuration: Duration(seconds: 4),
               transitionsBuilder: (_, animation, __, child) => child,
             );
           default:
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) {
-                return SongMenu();
+                return WelcomeScreen();
               },
               transitionDuration: Duration(seconds: 0),
               transitionsBuilder: (_, animation, __, child) => child,

@@ -5,30 +5,31 @@ import 'package:songbook_flutter/components/song_toolbar.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/models/song_item.dart';
+import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import '../constants.dart';
 
-class SongMenu extends StatelessWidget {
+class SongMenu extends StatefulWidget {
   static const String id = 'song_menu';
+
+  @override
+  _SongMenuState createState() => _SongMenuState();
+}
+
+class _SongMenuState extends State<SongMenu>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller.value = 1;
+  }
+
   @override
   Widget build(BuildContext context) {
-    print('menu opened');
-    if (context.select<SongData, List<SongItem>>((value) => value.songs) ==
-        null) {
-      print('load block entered');
-      context.select<SongData, Future<void>>((value) => value.loadDatabase());
-      return Scaffold(
-        body: Container(
-          child: Center(
-            child: Text(
-              'Songbook',
-              style: kHeaderTextStyle,
-            ),
-          ),
-        ),
-      );
-    }
-    print('no load block in menu');
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
@@ -38,14 +39,33 @@ class SongMenu extends StatelessWidget {
             color: Colors.white,
             child: Container(
               color: Colors.white,
-              child: SongListMenu(),
+              child: SongListMenu(
+                onPressed: (index) {
+                  print(
+                      'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
+                  context.read<SongData>().openSong(
+                      context.read<SongData>().songs[index].songId - kStarting);
+                  Navigator.pushNamed(context, SongDisplay.id).then((value) {
+                    _controller.value = 0;
+                    _controller.forward();
+                  });
+                },
+              ),
             ),
           ),
           SongToolbar(
             onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.idFromHome);
+              Navigator.pushNamed(context, SongSearch.idFromHome).then(
+                (value) {
+                  _controller.value = 0;
+                  _controller.forward();
+                },
+              );
             },
-            navigationIcon: Icons.menu,
+            navigationIcon: AnimatedIcon(
+              icon: AnimatedIcons.arrow_menu,
+              progress: _controller,
+            ),
             onIconPressed: () {},
             childHeader: Center(
               child: Hero(

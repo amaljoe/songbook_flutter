@@ -19,12 +19,15 @@ class _SongDisplayState extends State<SongDisplay>
   Animation<double> _opacityAnimation;
   Tween<Offset> _tweenOffsetLyrics;
   Animation<Offset> _offSetAnimationLyrics;
-  Animation<Offset> _offSetAnimationToolbar;
   Curve _curve = Curves.easeOutCubic;
+  AnimationController _controller;
+
   @override
   void initState() {
     print('enabling wakelock and animation controllers');
     super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     Wakelock.enable();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
@@ -35,6 +38,7 @@ class _SongDisplayState extends State<SongDisplay>
     _opacityAnimation = _tweenOpacity.animate(CurvedAnimation(
         parent: _animationController, curve: Curves.easeOutExpo));
     _animationController.forward();
+    _controller.reverse(from: 1);
   }
 
   @override
@@ -66,7 +70,10 @@ class _SongDisplayState extends State<SongDisplay>
             ),
           ),
           SongToolbar(
-            navigationIcon: Icons.arrow_back,
+            navigationIcon: AnimatedIcon(
+              icon: AnimatedIcons.arrow_menu,
+              progress: _controller,
+            ),
             onIconPressed: () {
               Navigator.pop(context);
             },

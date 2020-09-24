@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_item_widget.dart';
-import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import '../constants.dart';
 
 class SongListMenu extends StatelessWidget {
+  final Function onPressed;
+
+  SongListMenu({@required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     double topPadding;
@@ -21,11 +24,7 @@ class SongListMenu extends StatelessWidget {
           padding: EdgeInsets.only(top: topPadding),
           child: GestureDetector(
             onTap: () {
-              print(
-                  'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
-              context.read<SongData>().openSong(
-                  context.read<SongData>().songs[index].songId - kStarting);
-              Navigator.pushNamed(context, SongDisplay.id);
+              onPressed(index);
             },
             child: SongItemWidget(
               songItem: context.read<SongData>().songs[index],
