@@ -13,6 +13,7 @@ class SongListMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double topPadding;
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: context.select<SongData, int>((value) => value.songs.length),
       itemBuilder: (context, index) {
         if (index == 0) {

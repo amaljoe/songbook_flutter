@@ -19,19 +19,22 @@ class SongDisplayPager extends StatelessWidget {
           return Container(
             padding:
                 EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            child: ListView(children: [
-              Container(
-                color: Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: kToolbarBorderRadius + 8, left: 16, right: 16),
-                  child: Text(
-                    context.read<SongData>().songs[index].lyrics,
-                    style: kSongLyricsTextStyle,
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: kToolbarBorderRadius + 8, left: 16, right: 16),
+                    child: Text(
+                      context.read<SongData>().songs[index].lyrics,
+                      style: kSongLyricsTextStyle,
+                    ),
                   ),
                 ),
-              ),
-            ]),
+              ],
+            ),
           );
         });
   }
