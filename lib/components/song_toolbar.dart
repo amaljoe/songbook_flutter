@@ -19,7 +19,7 @@ class SongToolbar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
+          BoxShadow(color: Colors.black26, blurRadius: 6, spreadRadius: 0),
         ],
         color: Colors.white,
         borderRadius: BorderRadius.only(

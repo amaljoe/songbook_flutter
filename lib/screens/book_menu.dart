@@ -55,28 +55,11 @@ class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
             color: Colors.white,
             child: Container(
               color: Colors.white,
-              child: SongListMenu(
-                onPressed: (index) {
-                  print(
-                      'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
-                  context.read<SongData>().openSong(
-                      context.read<SongData>().songs[index].songId - kStarting);
-                  animation.forward();
-                  animation.addStatusListener(
-                    (status) async {
-                      if (status == AnimationStatus.completed &&
-                          allowNavigation) {
-                        allowNavigation = false;
-                        await Navigator.pushNamed(context, SongDisplay.id);
-                        print('menu animation restored');
-                        allowNavigation = true;
-                        animation.value = 0;
-                        _controller.value = 0;
-                        _controller.forward();
-                      }
-                    },
-                  );
-                },
+              child: Center(
+                child: Text(
+                  'Coming Soon',
+                  style: kWelcomeHeaderTextStyle.copyWith(color: Colors.red),
+                ),
               ),
             ),
           ),
@@ -95,10 +78,7 @@ class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
             ),
             onIconPressed: () {},
             childHeader: Center(
-              child: Text(
-                'Songbook',
-                style: kHeaderTextStyle,
-              ),
+              child: Container(),
             ),
           ),
           ScaleTransition(

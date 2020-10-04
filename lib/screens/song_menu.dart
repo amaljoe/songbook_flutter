@@ -11,13 +11,16 @@ import '../constants.dart';
 
 class SongMenu extends StatefulWidget {
   static const String id = 'song_menu';
+  final Function onTap;
+
+  SongMenu({this.onTap});
 
   @override
   _SongMenuState createState() => _SongMenuState();
 }
 
 class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController _navController;
   AnimationController animation;
   bool allowNavigation = true;
 
@@ -27,7 +30,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
     print('entering init of menu');
     animation =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    _controller = AnimationController(
+    _navController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 300), value: 1);
   }
 
@@ -41,7 +44,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
   void dispose() {
     super.dispose();
     print('entering dispose of menu');
-    _controller.dispose();
+    _navController.dispose();
   }
 
   @override
@@ -61,6 +64,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                       'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
                   context.read<SongData>().openSong(
                       context.read<SongData>().songs[index].songId - kStarting);
+                  widget.onTap();
                   animation.forward();
                   animation.addStatusListener(
                     (status) async {
@@ -71,8 +75,8 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                         print('menu animation restored');
                         allowNavigation = true;
                         animation.value = 0;
-                        _controller.value = 0;
-                        _controller.forward();
+                        _navController.value = 0;
+                        _navController.forward();
                       }
                     },
                   );
@@ -84,14 +88,14 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
             onSearchPressed: () {
               Navigator.pushNamed(context, SongSearch.idFromHome).then(
                 (value) {
-                  _controller.value = 0;
-                  _controller.forward();
+                  _navController.value = 0;
+                  _navController.forward();
                 },
               );
             },
             navigationIcon: AnimatedIcon(
               icon: AnimatedIcons.arrow_menu,
-              progress: _controller,
+              progress: _navController,
             ),
             onIconPressed: () {},
             childHeader: Center(
