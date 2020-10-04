@@ -30,7 +30,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
     super.initState();
     print('entering init of menu');
     animation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _navController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 300), value: 1);
   }
@@ -73,8 +73,8 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                       if (status == AnimationStatus.completed &&
                           allowNavigation) {
                         allowNavigation = false;
-                        await Navigator.pushNamed(context, SongDisplay.id)
-                            .then((value) => widget.onReturn());
+                        await Navigator.pushNamed(context, SongDisplay.id);
+                        widget.onReturn();
                         print('menu animation restored');
                         allowNavigation = true;
                         animation.value = 0;
@@ -109,15 +109,18 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
             ),
           ),
           ScaleTransition(
-            scale: Tween<double>(begin: 0, end: 3).animate(
-                CurvedAnimation(parent: animation, curve: Curves.easeIn)),
+            scale: Tween<double>(begin: 0, end: 1).animate(
+                CurvedAnimation(parent: animation, curve: Curves.ease)),
             child: FadeTransition(
               opacity: Tween<double>(begin: 0, end: 1).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeIn)),
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                  CurvedAnimation(parent: animation, curve: Curves.ease)),
+              child: Transform.scale(
+                scale: 2.5,
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                ),
               ),
             ),
           ),
