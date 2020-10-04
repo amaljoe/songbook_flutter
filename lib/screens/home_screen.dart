@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen>
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     animation = Tween<Offset>(begin: Offset.zero, end: Offset(0, 1)).animate(
-        CurvedAnimation(parent: animationController, curve: Curves.easeIn));
+        CurvedAnimation(parent: animationController, curve: Curves.easeInSine));
   }
 
   @override
@@ -30,15 +30,13 @@ class _HomeScreenState extends State<HomeScreen>
       body: IndexedStack(
         index: currentScreen,
         children: [
-          SongMenu(
-            onTap: () {
-              Future.delayed(Duration(milliseconds: 200)).then((value) {
-                animationController
-                    .forward()
-                    .then((value) => animationController.reverse(from: 1));
-              });
-            },
-          ),
+          SongMenu(onTap: () {
+            Future.delayed(Duration(milliseconds: 300)).then((value) {
+              animationController.forward();
+            });
+          }, onReturn: () {
+            animationController.reverse(from: 1);
+          }),
           BookMenu()
         ],
       ),

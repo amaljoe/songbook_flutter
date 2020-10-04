@@ -12,8 +12,9 @@ import '../constants.dart';
 class SongMenu extends StatefulWidget {
   static const String id = 'song_menu';
   final Function onTap;
+  final Function onReturn;
 
-  SongMenu({this.onTap});
+  SongMenu({this.onTap, this.onReturn});
 
   @override
   _SongMenuState createState() => _SongMenuState();
@@ -71,7 +72,8 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                       if (status == AnimationStatus.completed &&
                           allowNavigation) {
                         allowNavigation = false;
-                        await Navigator.pushNamed(context, SongDisplay.id);
+                        await Navigator.pushNamed(context, SongDisplay.id)
+                            .then((value) => widget.onReturn());
                         print('menu animation restored');
                         allowNavigation = true;
                         animation.value = 0;
