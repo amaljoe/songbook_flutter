@@ -30,7 +30,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
     super.initState();
     print('entering init of menu');
     animation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _navController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 300), value: 1);
   }
@@ -52,6 +52,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Stack(children: [
           Container(
             padding:

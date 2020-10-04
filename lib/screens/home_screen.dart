@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
 
 import 'book_menu.dart';
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
         index: currentScreen,
         children: [
           SongMenu(onTap: () {
-            Future.delayed(Duration(milliseconds: 300)).then((value) {
+            Future.delayed(Duration(milliseconds: 200)).then((value) {
               animationController.forward();
             });
           }, onReturn: () {
@@ -46,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen>
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+              topLeft: Radius.circular(kBottomNavigationBarRadius),
+              topRight: Radius.circular(kBottomNavigationBarRadius),
             ),
             boxShadow: [
               BoxShadow(spreadRadius: 0, color: Colors.black26, blurRadius: 6)
@@ -55,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+              topLeft: Radius.circular(kBottomNavigationBarRadius),
+              topRight: Radius.circular(kBottomNavigationBarRadius),
             ),
             child: BottomNavigationBar(
               onTap: (index) {

@@ -48,13 +48,13 @@ class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Stack(children: [
           Container(
             padding:
                 EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
             color: Colors.white,
             child: Container(
-              color: Colors.white,
               child: Center(
                 child: Text(
                   'Coming Soon',

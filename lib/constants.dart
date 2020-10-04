@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 double kSongToolbarHeight = 150.0;
 double kToolbarBorderRadius = 30.0;
+double kBottomNavigationBarRadius = 50.0;
 int kStarting = 200;
 
 TextStyle kSearchTextStyle = TextStyle(
