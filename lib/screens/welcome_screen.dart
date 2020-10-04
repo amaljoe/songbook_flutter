@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
-import 'package:songbook_flutter/screens/song_menu.dart';
+import 'package:songbook_flutter/screens/home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -20,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     await Firebase.initializeApp();
     await context.read<SongData>().loadDatabase();
     print('exiting main loading');
-    Navigator.pushReplacementNamed(context, SongMenu.id);
+    Navigator.pushReplacementNamed(context, HomeScreen.id);
   }
 
   @override

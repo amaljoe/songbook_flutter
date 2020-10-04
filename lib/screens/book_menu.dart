@@ -9,14 +9,14 @@ import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import '../constants.dart';
 
-class SongMenu extends StatefulWidget {
+class BookMenu extends StatefulWidget {
   static const String id = 'song_menu';
 
   @override
-  _SongMenuState createState() => _SongMenuState();
+  _BookMenuState createState() => _BookMenuState();
 }
 
-class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
+class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
   AnimationController _controller;
   AnimationController animation;
   bool allowNavigation = true;

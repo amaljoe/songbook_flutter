@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:songbook_flutter/screens/welcome_screen.dart';
 import 'models/song_data.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(
@@ -22,6 +23,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case HomeScreen.id:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return HomeScreen();
+              },
+              transitionDuration: Duration(milliseconds: 200),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(
+                  opacity:
+                      CurvedAnimation(parent: animation, curve: Curves.ease),
+                  child: child,
+                );
+              },
+            );
           case SongDisplay.id:
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) {
@@ -53,14 +68,6 @@ class MyApp extends StatelessWidget {
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) {
                 return SongMenu();
-              },
-              transitionDuration: Duration(milliseconds: 400),
-              transitionsBuilder: (_, animation, __, child) {
-                return FadeTransition(
-                  opacity:
-                      CurvedAnimation(parent: animation, curve: Curves.ease),
-                  child: child,
-                );
               },
             );
           case SongSearch.idFromHome:

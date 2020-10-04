@@ -5,6 +5,7 @@ import 'package:songbook_flutter/components/song_list_search.dart';
 import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
+import 'package:songbook_flutter/screens/song_menu.dart';
 import 'package:string_validator/string_validator.dart';
 
 class SongSearch extends StatefulWidget {
@@ -29,11 +30,17 @@ class _SongSearchState extends State<SongSearch>
     _controller.reverse(from: 1);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   void gotoSong(int index) async {
     index -= kStarting;
     print('item $index pressed');
     context.read<SongData>().openSong(index);
-    await Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
+    Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
         (Route<dynamic> route) => route.isFirst ? true : false);
   }
 
