@@ -25,7 +25,7 @@ https://github.com/amaljoe/songbook_native_android
 Programming language used :  
 Dart
 
-Database used :
+Database used :  
 SQLite
 
 Framework used :  
