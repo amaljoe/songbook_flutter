@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return HomeScreen();
               },
-              transitionDuration: Duration(milliseconds: 200),
+              transitionDuration: Duration(milliseconds: 800),
               transitionsBuilder: (_, animation, __, child) {
                 return FadeTransition(
                   opacity:
@@ -45,15 +45,26 @@ class MyApp extends StatelessWidget {
               transitionDuration: Duration(milliseconds: 300),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                return Stack(
-                  children: [
-                    FadeTransition(
+                switch (animation.status) {
+                  case AnimationStatus.forward:
+                    print('forward');
+                    return FadeTransition(
                         opacity: Tween<double>(begin: 0, end: 1).animate(
                             CurvedAnimation(
                                 parent: animation, curve: Curves.easeOutCubic)),
-                        child: child),
-                  ],
-                );
+                        child: child);
+                  case AnimationStatus.reverse:
+                    print('reverse');
+                    return SlideTransition(
+                      position:
+                          Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)
+                              .animate(CurvedAnimation(
+                                  parent: animation, curve: Curves.ease)),
+                      child: child,
+                    );
+                  default:
+                    return child;
+                }
               },
             );
           case WelcomeScreen.id:

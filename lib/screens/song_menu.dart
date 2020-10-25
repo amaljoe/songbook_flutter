@@ -78,8 +78,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                         print('menu animation restored');
                         allowNavigation = true;
                         animation.value = 0;
-                        _navController.value = 0;
-                        _navController.forward();
+                        _navController.value = 1;
                       }
                     },
                   );
