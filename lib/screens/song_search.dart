@@ -40,8 +40,13 @@ class _SongSearchState extends State<SongSearch>
     index -= kStarting;
     print('item $index pressed');
     context.read<SongData>().openSong(index);
-    Navigator.pushNamedAndRemoveUntil(context, SongDisplay.id,
-        (Route<dynamic> route) => route.isFirst ? true : false);
+    // Navigator.popUntil(context, (route) => route.isFirst);
+    // Navigator.pushNamed(context, SongDisplay.id);
+    if (widget.fromHome) {
+      Navigator.pushReplacementNamed(context, SongDisplay.id);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override

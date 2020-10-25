@@ -47,14 +47,12 @@ class MyApp extends StatelessWidget {
                   (context, animation, secondaryAnimation, child) {
                 switch (animation.status) {
                   case AnimationStatus.forward:
-                    print('forward');
                     return FadeTransition(
                         opacity: Tween<double>(begin: 0, end: 1).animate(
                             CurvedAnimation(
                                 parent: animation, curve: Curves.easeOutCubic)),
                         child: child);
                   case AnimationStatus.reverse:
-                    print('reverse');
                     return SlideTransition(
                       position:
                           Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)

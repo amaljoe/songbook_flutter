@@ -73,12 +73,13 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                       if (status == AnimationStatus.completed &&
                           allowNavigation) {
                         allowNavigation = false;
-                        await Navigator.pushNamed(context, SongDisplay.id);
-                        widget.onReturn();
-                        print('menu animation restored');
-                        allowNavigation = true;
-                        animation.value = 0;
-                        _navController.value = 1;
+                        Navigator.pushNamed(context, SongDisplay.id)
+                            .whenComplete(() {
+                          widget.onReturn();
+                          print('menu animation restored');
+                          allowNavigation = true;
+                          animation.value = 0;
+                        });
                       }
                     },
                   );

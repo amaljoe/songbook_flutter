@@ -23,7 +23,6 @@ class _SongDisplayState extends State<SongDisplay>
 
   @override
   void initState() {
-    print('enabling wakelock and animation controllers');
     super.initState();
     Wakelock.enable();
     _animationController =
@@ -42,19 +41,16 @@ class _SongDisplayState extends State<SongDisplay>
   void deactivate() {
     super.deactivate();
     Wakelock.disable();
-    print('wakelock disabled');
   }
 
   @override
   void dispose() {
     super.dispose();
     _animationController.dispose();
-    print('animation disposed');
   }
 
   @override
   Widget build(BuildContext context) {
-    print('entering build of display');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
