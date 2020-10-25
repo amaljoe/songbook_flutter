@@ -67,7 +67,12 @@ class _SongDisplayState extends State<SongDisplay>
                 Navigator.pop(context);
               },
               onSearchPressed: () {
-                Navigator.pushNamed(context, SongSearch.id);
+                Navigator.pushNamed(context, SongSearch.id).then((newSong) {
+                  if (newSong) {
+                    _animationController.value = 0;
+                    _animationController.forward();
+                  }
+                });
               },
               childHeader: SongTitleHeader(),
             ),

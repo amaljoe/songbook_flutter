@@ -70,8 +70,6 @@ class MyApp extends StatelessWidget {
               pageBuilder: (_, __, ___) {
                 return WelcomeScreen();
               },
-              transitionDuration: Duration(seconds: 0),
-              transitionsBuilder: (_, animation, __, child) => child,
             );
           case SongMenu.id:
             return PageRouteBuilder(
