@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../utilities/constants.dart';
 
 class SearchBar extends StatelessWidget {
   final Function onPressed;

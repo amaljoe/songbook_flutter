@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/constants.dart';
+import 'file:///J:/Workstation/AndroidStudioProjects/songbook_flutter/lib/utilities/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/home_screen.dart';

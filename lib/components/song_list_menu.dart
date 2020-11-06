@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_item_widget.dart';
 import 'package:songbook_flutter/models/song_data.dart';
-import '../constants.dart';
+import '../utilities/constants.dart';
 
 class SongListMenu extends StatelessWidget {
   final Function onPressed;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/models/song_item.dart';
-import '../constants.dart';
+import '../utilities/constants.dart';
 
 class SongItemWidget extends StatelessWidget {
   final SongItem songItem;

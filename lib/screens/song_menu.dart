@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
 import 'package:songbook_flutter/components/song_toolbar.dart';
-import 'package:songbook_flutter/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
-import '../constants.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 
 class SongMenu extends StatefulWidget {
   static const String id = 'song_menu';
@@ -28,7 +27,6 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    print('entering init of menu');
     animation =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _navController = AnimationController(
@@ -36,15 +34,8 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
   }
 
   @override
-  void deactivate() {
-    super.deactivate();
-    print('entering deactivate of menu');
-  }
-
-  @override
   void dispose() {
     super.dispose();
-    print('entering dispose of menu');
     _navController.dispose();
   }
 
