@@ -2,7 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
-import 'package:songbook_flutter/components/song_toolbar.dart';
+import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
@@ -78,7 +78,8 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
               ),
             ),
           ),
-          SongToolbar(
+          Toolbar(
+            type: ToolbarType.song,
             onSearchPressed: () {
               Navigator.pushNamed(context, SongSearch.idFromHome).then(
                 (value) {

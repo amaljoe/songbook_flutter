@@ -6,8 +6,10 @@ class SearchBar extends StatelessWidget {
   final Function onPressed;
   final Function onTextChanged;
   final bool autoFocus;
+  final String text;
 
   SearchBar({
+    @required this.text,
     @required this.onPressed,
     @required this.onTextChanged,
     @required this.autoFocus,
@@ -27,7 +29,7 @@ class SearchBar extends StatelessWidget {
             Icons.search,
             color: Colors.black,
           ),
-          hintText: 'Search song title or number',
+          hintText: text,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue, width: 1),
             borderRadius: BorderRadius.all(

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
-class SongToolbar extends StatelessWidget {
+class Toolbar extends StatelessWidget {
   final navigationIcon;
+  final ToolbarType type;
   final Function onIconPressed;
   final Widget childHeader;
   final Function onSearchPressed;
 
-  SongToolbar({
+  Toolbar({
     @required this.navigationIcon,
     @required this.onIconPressed,
+    @required this.type,
     @required this.childHeader,
     @required this.onSearchPressed,
   });
@@ -27,7 +29,7 @@ class SongToolbar extends StatelessWidget {
           bottomRight: Radius.circular(kToolbarBorderRadius),
         ),
       ),
-      height: kSongToolbarHeight,
+      height: childHeader != null ? kSongToolbarHeight : kSongToolbarHeight / 2,
       child: Column(
         children: [
           Container(
@@ -45,6 +47,9 @@ class SongToolbar extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(top: 8.0),
                     child: SearchBar(
+                        text: type == ToolbarType.song
+                            ? 'Search song title or number'
+                            : 'Enter page number',
                         onPressed: onSearchPressed,
                         onTextChanged: (value) {},
                         autoFocus: false),
@@ -60,7 +65,7 @@ class SongToolbar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(child: childHeader),
+                Expanded(child: childHeader ?? Container()),
               ],
             ),
           ),
@@ -69,3 +74,5 @@ class SongToolbar extends StatelessWidget {
     );
   }
 }
+
+enum ToolbarType { book, song }

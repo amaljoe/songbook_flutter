@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/components/song_display_pager.dart';
+import 'package:songbook_flutter/components/book_display_list.dart';
 import 'package:songbook_flutter/components/song_title_header.dart';
 import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:wakelock/wakelock.dart';
 
-class SongDisplay extends StatefulWidget {
-  static const String id = 'song_display/';
-
+class BookDisplay extends StatefulWidget {
+  static const String id = 'book_display';
   @override
-  _SongDisplayState createState() => _SongDisplayState();
+  _BookDisplayState createState() => _BookDisplayState();
 }
 
-class _SongDisplayState extends State<SongDisplay>
+class _BookDisplayState extends State<BookDisplay>
     with TickerProviderStateMixin {
   AnimationController _animationController;
   Tween<Offset> _tweenOffsetLyrics;
@@ -57,12 +56,12 @@ class _SongDisplayState extends State<SongDisplay>
         child: Stack(children: [
           SlideTransition(
             position: _offSetAnimationLyrics,
-            child: SongDisplayPager(),
+            child: BookDisplayList(),
           ),
           SlideTransition(
             position: _offSetAnimationToolbar,
             child: Toolbar(
-              type: ToolbarType.song,
+              type: ToolbarType.book,
               navigationIcon: Icon(Icons.arrow_back),
               onIconPressed: () {
                 Navigator.pop(context);
@@ -75,7 +74,7 @@ class _SongDisplayState extends State<SongDisplay>
                   }
                 });
               },
-              childHeader: SongTitleHeader(),
+              childHeader: null,
             ),
           ),
         ]),

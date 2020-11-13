@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/components/song_toolbar.dart';
+import 'package:songbook_flutter/components/toolbar.dart';
+import 'package:songbook_flutter/screens/book_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
@@ -51,31 +52,34 @@ class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
             color: Colors.white,
             child: Container(
               child: Center(
-                child: Text(
-                  'Coming Soon',
-                  style: kWelcomeHeaderTextStyle.copyWith(color: Colors.red),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, BookDisplay.id);
+                  },
+                  child: Text(
+                    'Coming Soon',
+                    style: kWelcomeHeaderTextStyle.copyWith(color: Colors.red),
+                  ),
                 ),
               ),
             ),
           ),
-          SongToolbar(
-            onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.idFromHome).then(
-                (value) {
-                  _controller.value = 0;
-                  _controller.forward();
-                },
-              );
-            },
-            navigationIcon: AnimatedIcon(
-              icon: AnimatedIcons.arrow_menu,
-              progress: _controller,
-            ),
-            onIconPressed: () {},
-            childHeader: Center(
-              child: Container(),
-            ),
-          ),
+          Toolbar(
+              type: ToolbarType.book,
+              onSearchPressed: () {
+                Navigator.pushNamed(context, SongSearch.idFromHome).then(
+                  (value) {
+                    _controller.value = 0;
+                    _controller.forward();
+                  },
+                );
+              },
+              navigationIcon: AnimatedIcon(
+                icon: AnimatedIcons.arrow_menu,
+                progress: _controller,
+              ),
+              onIconPressed: () {},
+              childHeader: null),
           ScaleTransition(
             scale: Tween<double>(begin: 0, end: 3).animate(
                 CurvedAnimation(parent: animation, curve: Curves.easeIn)),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/screens/book_display.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,34 @@ class MyApp extends StatelessWidget {
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) {
                 return SongDisplay();
+              },
+              transitionDuration: Duration(milliseconds: 300),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                switch (animation.status) {
+                  case AnimationStatus.forward:
+                    return FadeTransition(
+                        opacity: Tween<double>(begin: 0, end: 1).animate(
+                            CurvedAnimation(
+                                parent: animation, curve: Curves.easeOutCubic)),
+                        child: child);
+                  case AnimationStatus.reverse:
+                    return SlideTransition(
+                      position:
+                          Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)
+                              .animate(CurvedAnimation(
+                                  parent: animation, curve: Curves.ease)),
+                      child: child,
+                    );
+                  default:
+                    return child;
+                }
+              },
+            );
+          case BookDisplay.id:
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
+                return BookDisplay();
               },
               transitionDuration: Duration(milliseconds: 300),
               transitionsBuilder:

@@ -8,7 +8,7 @@ class SongDisplayPager extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView.builder(
         onPageChanged: (index) {
-          print('actually $index');
+          print('index number: $index');
           context.read<SongData>().openSong(index);
         },
         controller: PageController(

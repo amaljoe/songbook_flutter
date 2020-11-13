@@ -72,13 +72,12 @@ class _SongSearchState extends State<SongSearch>
                     child: Padding(
                       padding: EdgeInsets.only(top: 8.0),
                       child: SearchBar(
+                        text: 'Search song title or number',
                         onPressed: () {},
                         onTextChanged: (String searchText) async {
                           if (isNumeric(searchText) && searchText.length == 3) {
-                            print('3 are here');
                             int num = int.parse(searchText);
                             gotoSong(num);
-                            print('3 are here for sure');
                           } else {
                             context.read<SongData>().search(searchText);
                           }
