@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/components/search_bar.dart';
-import 'file:///J:/Workstation/AndroidStudioProjects/songbook_flutter/lib/utilities/constants.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 
 class SongToolbar extends StatelessWidget {
   final navigationIcon;

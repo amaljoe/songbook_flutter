@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'file:///J:/Workstation/AndroidStudioProjects/songbook_flutter/lib/utilities/constants.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 
 import 'book_menu.dart';
 

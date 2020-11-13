@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
-import 'file:///J:/Workstation/AndroidStudioProjects/songbook_flutter/lib/utilities/constants.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 
 class SongDisplayPager extends StatelessWidget {
   @override
