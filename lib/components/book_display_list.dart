@@ -12,7 +12,7 @@ class BookDisplayList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
-                top: index == 0 ? kSongToolbarHeight / 2 + 20 : 20),
+                top: index == 0 ? kSongToolbarHeight / 2 + 8 : 8, bottom: 8),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
