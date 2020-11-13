@@ -5,6 +5,11 @@ double kToolbarBorderRadius = 30.0;
 double kBottomNavigationBarRadius = 50.0;
 int kStarting = 101;
 
+TextStyle kPageNumberStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.black54,
+);
+
 TextStyle kSearchTextStyle = TextStyle(
   fontFamily: 'roboto',
   fontWeight: FontWeight.bold,

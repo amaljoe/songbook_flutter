@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/components/book_display_list.dart';
-import 'package:songbook_flutter/components/song_title_header.dart';
 import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:wakelock/wakelock.dart';
@@ -53,31 +52,34 @@ class _BookDisplayState extends State<BookDisplay>
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Stack(children: [
-          SlideTransition(
-            position: _offSetAnimationLyrics,
-            child: BookDisplayList(),
-          ),
-          SlideTransition(
-            position: _offSetAnimationToolbar,
-            child: Toolbar(
-              type: ToolbarType.book,
-              navigationIcon: Icon(Icons.arrow_back),
-              onIconPressed: () {
-                Navigator.pop(context);
-              },
-              onSearchPressed: () {
-                Navigator.pushNamed(context, SongSearch.id).then((newSong) {
-                  if (newSong != null && newSong) {
-                    _animationController.value = 0;
-                    _animationController.forward();
-                  }
-                });
-              },
-              childHeader: null,
+        child: Container(
+          color: Colors.grey.shade50,
+          child: Stack(children: [
+            SlideTransition(
+              position: _offSetAnimationLyrics,
+              child: BookDisplayList(),
             ),
-          ),
-        ]),
+            SlideTransition(
+              position: _offSetAnimationToolbar,
+              child: Toolbar(
+                type: ToolbarType.book,
+                navigationIcon: Icon(Icons.arrow_back),
+                onIconPressed: () {
+                  Navigator.pop(context);
+                },
+                onSearchPressed: () {
+                  Navigator.pushNamed(context, SongSearch.id).then((newSong) {
+                    if (newSong != null && newSong) {
+                      _animationController.value = 0;
+                      _animationController.forward();
+                    }
+                  });
+                },
+                childHeader: null,
+              ),
+            ),
+          ]),
+        ),
       ),
     );
   }

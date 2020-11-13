@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/models/book_data.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/screens/home_screen.dart';
@@ -19,6 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     print('entered main loading');
     await Firebase.initializeApp();
     await context.read<SongData>().loadDatabase();
+    await context.read<BookData>().loadDatabase();
     print('exiting main loading');
     Navigator.pushReplacementNamed(context, HomeScreen.id);
   }

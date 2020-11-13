@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:songbook_flutter/models/book_data.dart';
 import 'package:songbook_flutter/screens/book_display.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
@@ -11,8 +12,13 @@ import 'screens/home_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider<SongData>(
-        create: (context) => SongData(), child: MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SongData>(create: (_) => SongData()),
+        ChangeNotifierProvider<BookData>(create: (_) => BookData()),
+      ],
+      child: MyApp(),
+    ),
   );
 }
 
