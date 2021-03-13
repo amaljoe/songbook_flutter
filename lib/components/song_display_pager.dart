@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
+import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
-class SongDisplayPager extends StatelessWidget {
+class SongDisplayPager extends StatefulWidget {
+  @override
+  _SongDisplayPagerState createState() => _SongDisplayPagerState();
+}
+
+class _SongDisplayPagerState extends State<SongDisplayPager> {
+  PageController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(
+      keepPage: false,
+      initialPage: context.read<SongData>().activeSong,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    int songNum = context.read<SongData>().activeSong;
+    if (_controller.hasClients && _controller.page != songNum) {
+      _controller.jumpToPage(songNum);
+    }
     return PageView.builder(
         onPageChanged: (index) {
           print('index number: $index');
           context.read<SongData>().openSong(index);
         },
-        controller: PageController(
-            initialPage:
-                context.select<SongData, int>((value) => value.activeSong)),
+        controller: _controller,
         itemCount: context.select<SongData, int>((value) => value.songs.length),
         itemBuilder: (context, index) {
           return Container(
