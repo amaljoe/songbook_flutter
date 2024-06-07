@@ -19,7 +19,7 @@ https://github.com/amaljoe/songbook_native_android
 -> User can add a song to their favourites list.  
 -> Individual accounts linked to google for each user to store their favourite songs and personalised recomendations. 
 
-## AI Integrated Feature (Under Development) :  
+## AI Integrated Feature (Future Scope) :  
 -> Auto detect a song while in church so that it can be opened even if the user doesn't know the song number or title.  
 
 Programming language used :  
