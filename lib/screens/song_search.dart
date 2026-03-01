@@ -3,20 +3,53 @@ import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_search.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
-class SongSearch extends StatelessWidget {
+
+class SongSearch extends StatefulWidget {
   final bool fromHome;
   static const String idFromHome = 'song_search_home';
   static const String id = 'song_search';
 
   SongSearch({required this.fromHome});
 
-  void _gotoSong(BuildContext context, int songId) {
+  @override
+  State<SongSearch> createState() => _SongSearchState();
+}
+
+class _SongSearchState extends State<SongSearch> {
+  bool _numpadMode = true;
+  late final TextEditingController _controller;
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _gotoSong(int songId) {
     context.read<SongData>().openSong(songId - 1);
-    if (fromHome) {
+    if (widget.fromHome) {
       Navigator.pushReplacementNamed(context, SongDisplay.id);
     } else {
       Navigator.pop(context);
     }
+  }
+
+  void _toggleMode() {
+    _focusNode.unfocus();
+    setState(() => _numpadMode = !_numpadMode);
+    _controller.clear();
+    context.read<SongData>().clearSearch();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _focusNode.requestFocus());
   }
 
   @override
@@ -25,26 +58,36 @@ class SongSearch extends StatelessWidget {
       appBar: AppBar(
         leading: BackButton(),
         title: TextField(
+          controller: _controller,
+          focusNode: _focusNode,
           autofocus: true,
+          keyboardType:
+              _numpadMode ? TextInputType.number : TextInputType.text,
           decoration: InputDecoration(
-            hintText: 'Search by title or number',
+            hintText: _numpadMode ? 'Song number' : 'Search by title',
             border: InputBorder.none,
           ),
           onChanged: (text) {
-            if (int.tryParse(text) != null && text.length == 3) {
-              _gotoSong(context, int.parse(text));
+            if (_numpadMode &&
+                int.tryParse(text) != null &&
+                text.length == 3) {
+              _gotoSong(int.parse(text));
             } else {
               context.read<SongData>().search(text);
             }
           },
         ),
+        actions: [
+          IconButton(
+            icon: Icon(_numpadMode ? Icons.abc : Icons.dialpad),
+            tooltip: _numpadMode ? 'Switch to title search' : 'Switch to number',
+            onPressed: _toggleMode,
+          ),
+        ],
       ),
       body: SongListSearch(
         onPressed: (index) {
-          _gotoSong(
-            context,
-            context.read<SongData>().searchSongs[index].songId,
-          );
+          _gotoSong(context.read<SongData>().searchSongs[index].songId);
         },
       ),
     );
