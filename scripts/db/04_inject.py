@@ -12,9 +12,10 @@ import json
 import os
 import sqlite3
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-INDEX_PATH   = os.path.join(PROJECT_ROOT, 'data', 'processed', 'index.jsonl')
-ASSETS_DIR   = os.path.join(PROJECT_ROOT, 'assets')
+PROJECT_ROOT    = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+INDEX_PATH      = os.path.join(PROJECT_ROOT, 'data', 'processed', 'index.jsonl')
+LLM_INDEX_PATH  = os.path.join(PROJECT_ROOT, 'data', 'processed', 'llm_songs_index.jsonl')
+ASSETS_DIR      = os.path.join(PROJECT_ROOT, 'assets')
 
 
 def _read_html(rel_path):
@@ -27,6 +28,7 @@ if __name__ == '__main__':
         print(f'ERROR: {INDEX_PATH} not found — run Step 3 first.')
         raise SystemExit(1)
 
+    # Load base index (songs + liturgy from 03_index.py)
     entries = []
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         for line in f:
@@ -34,8 +36,20 @@ if __name__ == '__main__':
             if line:
                 entries.append(json.loads(line))
 
-    songs   = [e for e in entries if e['type'] == 'song']
     liturgy = [e for e in entries if e['type'] == 'liturgy']
+
+    # Prefer LLM-generated song titles (llm_songs_index.jsonl) if available
+    if os.path.exists(LLM_INDEX_PATH):
+        songs = []
+        with open(LLM_INDEX_PATH, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    songs.append(json.loads(line))
+        print(f'Using LLM song titles from {LLM_INDEX_PATH} ({len(songs)} songs)')
+    else:
+        songs = [e for e in entries if e['type'] == 'song']
+        print(f'LLM index not found — using basic titles from {INDEX_PATH}')
 
     os.makedirs(ASSETS_DIR, exist_ok=True)
 
@@ -56,7 +70,7 @@ if __name__ == '__main__':
     for entry in songs:
         cur.execute(
             'INSERT INTO songs (songId, title, titleEng, lyrics) VALUES (?, ?, ?, ?)',
-            (entry['id'], entry['title'], entry['title'], _read_html(entry['html'])),
+            (entry['id'], entry['title'], entry.get('titleEng', entry['title']), _read_html(entry['html'])),
         )
     conn.commit()
     conn.close()

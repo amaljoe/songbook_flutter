@@ -60,7 +60,7 @@ def format_song_html(lines):
             if in_para:
                 html_parts.append('</p>')
                 in_para = False
-            html_parts.append(f'<h3>{stripped}</h3>')
+            html_parts.append(f'<h4>{stripped}</h4>')
             last_spacer = False
         else:
             if in_para:
