@@ -3,6 +3,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/models/book_data.dart';
+import 'package:songbook_flutter/models/search_history.dart';
 import 'package:songbook_flutter/models/settings_data.dart';
 import 'package:songbook_flutter/screens/book_display.dart';
 import 'package:songbook_flutter/screens/settings_screen.dart';
@@ -16,11 +17,13 @@ void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   final settings = SettingsData();
-  await settings.load();
+  final searchHistory = SearchHistoryData();
+  await Future.wait([settings.load(), searchHistory.load()]);
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<SettingsData>.value(value: settings),
+        ChangeNotifierProvider<SearchHistoryData>.value(value: searchHistory),
         ChangeNotifierProvider<SongData>(create: (_) => SongData()),
         ChangeNotifierProvider<BookData>(create: (_) => BookData()),
       ],
