@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import 'package:songbook_flutter/models/settings_data.dart';
 import 'package:songbook_flutter/models/song_data.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
 
 class SongDisplayPager extends StatefulWidget {
   @override
@@ -23,6 +23,7 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
 
   @override
   Widget build(BuildContext context) {
+    final textSizeFactor = context.watch<SettingsData>().textSizeFactor;
     int songNum = context.read<SongData>().activeSong ?? 0;
     if (_controller.hasClients && _controller.page != songNum) {
       _controller.jumpToPage(songNum);
@@ -32,36 +33,27 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
           context.read<SongData>().openSong(index);
         },
         controller: _controller,
-        itemCount: context.select<SongData, int>((value) => value.songs?.length ?? 0),
+        itemCount:
+            context.select<SongData, int>((value) => value.songs?.length ?? 0),
         itemBuilder: (context, index) {
-          return Container(
-            padding:
-                EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: kToolbarBorderRadius + 8, left: 8, right: 8),
-                    child: Html(
-                      data: context.read<SongData>().songs![index].lyrics,
-                      style: {
-                        'body': Style(
-                          fontFamily: 'roboto',
-                          fontSize: FontSize(18),
-                          lineHeight: LineHeight(1.6),
-                        ),
-                        'b': Style(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      },
-                    ),
+          return ListView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            children: [
+              Html(
+                data: context.read<SongData>().songs![index].lyrics,
+                style: {
+                  'body': Style(
+                    fontFamily: 'roboto',
+                    fontSize: FontSize(18 * textSizeFactor),
+                    lineHeight: LineHeight(1.6),
                   ),
-                ),
-              ],
-            ),
+                  'b': Style(
+                    fontWeight: FontWeight.w800,
+                  ),
+                },
+              ),
+            ],
           );
         });
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/models/book_data.dart';
+import 'package:songbook_flutter/models/settings_data.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
 class BookDisplayList extends StatelessWidget {
@@ -9,6 +10,7 @@ class BookDisplayList extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = context.watch<BookData>().pages;
     final activePage = context.watch<BookData>().activePage;
+    final textSizeFactor = context.watch<SettingsData>().textSizeFactor;
 
     if (pages == null || activePage == null) {
       return Center(child: CircularProgressIndicator());
@@ -17,13 +19,13 @@ class BookDisplayList extends StatelessWidget {
     final item = pages[activePage];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.only(
-          top: kSongToolbarHeight / 2 + 8, left: 16, right: 16, bottom: 24),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 24),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
-            BoxShadow(color: Colors.black26, blurRadius: 6, spreadRadius: 0),
+            BoxShadow(
+                color: Colors.black26, blurRadius: 6, spreadRadius: 0),
           ],
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
@@ -44,7 +46,7 @@ class BookDisplayList extends StatelessWidget {
                 style: {
                   'body': Style(
                     fontFamily: 'roboto',
-                    fontSize: FontSize(16),
+                    fontSize: FontSize(16 * textSizeFactor),
                     lineHeight: LineHeight(1.6),
                   ),
                   'em': Style(

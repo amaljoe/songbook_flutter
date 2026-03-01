@@ -1,118 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
-import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/models/song_data.dart';
+import 'package:songbook_flutter/screens/settings_screen.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
-class SongMenu extends StatefulWidget {
+class SongMenu extends StatelessWidget {
   static const String id = 'song_menu';
-  final Function? onTap;
-  final Function? onReturn;
-
-  SongMenu({this.onTap, this.onReturn});
-
-  @override
-  _SongMenuState createState() => _SongMenuState();
-}
-
-class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
-  late AnimationController _navController;
-  late AnimationController animation;
-  bool allowNavigation = true;
-
-  @override
-  void initState() {
-    super.initState();
-    animation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    _navController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 300), value: 1);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _navController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: Stack(children: [
-          Container(
-            padding:
-                EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            color: Colors.white,
-            child: Container(
-              color: Colors.white,
-              child: SongListMenu(
-                onPressed: (index) {
-                  context.read<SongData>().openSong(
-                      context.read<SongData>().songs![index].songId - kStarting);
-                  widget.onTap?.call();
-                  animation.forward();
-                  animation.addStatusListener(
-                    (status) async {
-                      if (status == AnimationStatus.completed &&
-                          allowNavigation) {
-                        allowNavigation = false;
-                        Navigator.pushNamed(context, SongDisplay.id)
-                            .whenComplete(() {
-                          widget.onReturn?.call();
-                          allowNavigation = true;
-                          animation.value = 0;
-                        });
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
+      appBar: AppBar(
+        title: Text('Songbook'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () =>
+                Navigator.pushNamed(context, SongSearch.idFromHome),
           ),
-          Toolbar(
-            type: ToolbarType.song,
-            onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.idFromHome).then(
-                (value) {
-                  _navController.value = 0;
-                  _navController.forward();
-                },
-              );
-            },
-            navigationIcon: AnimatedIcon(
-              icon: AnimatedIcons.arrow_menu,
-              progress: _navController,
-            ),
-            onIconPressed: () {},
-            childHeader: Center(
-              child: Text(
-                'Songbook',
-                style: kHeaderTextStyle,
-              ),
-            ),
+          IconButton(
+            icon: Icon(Icons.settings_outlined),
+            onPressed: () =>
+                Navigator.pushNamed(context, SettingsScreen.id),
           ),
-          ScaleTransition(
-            scale: Tween<double>(begin: 0, end: 1).animate(
-                CurvedAnimation(parent: animation, curve: Curves.ease)),
-            child: FadeTransition(
-              opacity: Tween<double>(begin: 0, end: 1).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.ease)),
-              child: Transform.scale(
-                scale: 2.5,
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        ]),
+        ],
+      ),
+      body: SongListMenu(
+        onPressed: (index) {
+          context.read<SongData>().openSong(
+              context.read<SongData>().songs![index].songId - kStarting);
+          Navigator.pushNamed(context, SongDisplay.id);
+        },
       ),
     );
   }

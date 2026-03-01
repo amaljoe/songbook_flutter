@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
+import 'package:songbook_flutter/screens/book_menu.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
-
-import 'book_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -10,74 +8,34 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  int currentScreen = 0;
-  late Animation<Offset> animation;
-
-  @override
-  void initState() {
-    super.initState();
-    animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    animation = Tween<Offset>(begin: Offset.zero, end: Offset(0, 1)).animate(
-        CurvedAnimation(parent: animationController, curve: Curves.easeInSine));
-  }
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: currentScreen,
+        index: _selectedIndex,
         children: [
-          SongMenu(onTap: () {
-            Future.delayed(Duration(milliseconds: 200)).then((value) {
-              animationController.forward();
-            });
-          }, onReturn: () {
-            animationController.reverse(from: 1);
-          }),
-          BookMenu()
+          SongMenu(),
+          BookMenu(),
         ],
       ),
-      extendBody: true,
-      bottomNavigationBar: SlideTransition(
-        position: animation,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(kBottomNavigationBarRadius),
-              topRight: Radius.circular(kBottomNavigationBarRadius),
-            ),
-            boxShadow: [
-              BoxShadow(spreadRadius: 0, color: Colors.black26, blurRadius: 6)
-            ],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (i) => setState(() => _selectedIndex = i),
+        destinations: [
+          NavigationDestination(
+            icon: Icon(Icons.music_note_outlined),
+            selectedIcon: Icon(Icons.music_note),
+            label: 'Songbook',
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(kBottomNavigationBarRadius),
-              topRight: Radius.circular(kBottomNavigationBarRadius),
-            ),
-            child: BottomNavigationBar(
-              onTap: (index) {
-                setState(() {
-                  currentScreen = index;
-                });
-              },
-              currentIndex: currentScreen,
-              selectedItemColor: kAccentColor,
-              unselectedItemColor: Colors.grey.shade500,
-              items: [
-                BottomNavigationBarItem(
-                    label: 'പാട്ടുപുസ്തകം',
-                    icon: Icon(Icons.library_music)),
-                BottomNavigationBarItem(
-                    label: 'ആരാധനക്രമം', icon: Icon(Icons.library_books))
-              ],
-            ),
+          NavigationDestination(
+            icon: Icon(Icons.menu_book_outlined),
+            selectedIcon: Icon(Icons.menu_book),
+            label: 'Liturgy',
           ),
-        ),
+        ],
       ),
     );
   }

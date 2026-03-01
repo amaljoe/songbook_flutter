@@ -1,112 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/book_list_menu.dart';
-import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/models/book_data.dart';
 import 'package:songbook_flutter/screens/book_display.dart';
-import 'package:songbook_flutter/screens/song_search.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
+import 'package:songbook_flutter/screens/settings_screen.dart';
 
-class BookMenu extends StatefulWidget {
+class BookMenu extends StatelessWidget {
   static const String id = 'book_menu';
-
-  @override
-  _BookMenuState createState() => _BookMenuState();
-}
-
-class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
-  late AnimationController _navController;
-  late AnimationController animation;
-  bool allowNavigation = true;
-
-  @override
-  void initState() {
-    super.initState();
-    animation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    _navController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 300), value: 1);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _navController.dispose();
-    animation.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: Stack(children: [
-          Container(
-            padding:
-                EdgeInsets.only(top: kSongToolbarHeight - kToolbarBorderRadius),
-            color: Colors.white,
-            child: Container(
-              color: Colors.white,
-              child: BookListMenu(
-                onPressed: (index) {
-                  context.read<BookData>().openPage(index);
-                  animation.forward();
-                  animation.addStatusListener(
-                    (status) async {
-                      if (status == AnimationStatus.completed &&
-                          allowNavigation) {
-                        allowNavigation = false;
-                        Navigator.pushNamed(context, BookDisplay.id)
-                            .whenComplete(() {
-                          allowNavigation = true;
-                          animation.value = 0;
-                        });
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
+      appBar: AppBar(
+        title: Text('Liturgy'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings_outlined),
+            onPressed: () =>
+                Navigator.pushNamed(context, SettingsScreen.id),
           ),
-          Toolbar(
-            type: ToolbarType.book,
-            onSearchPressed: () {
-              Navigator.pushNamed(context, SongSearch.idFromHome).then(
-                (value) {
-                  _navController.value = 0;
-                  _navController.forward();
-                },
-              );
-            },
-            navigationIcon: AnimatedIcon(
-              icon: AnimatedIcons.arrow_menu,
-              progress: _navController,
-            ),
-            onIconPressed: () {},
-            childHeader: Center(
-              child: Text(
-                'Liturgy',
-                style: kHeaderTextStyle,
-              ),
-            ),
-          ),
-          ScaleTransition(
-            scale: Tween<double>(begin: 0, end: 1).animate(
-                CurvedAnimation(parent: animation, curve: Curves.ease)),
-            child: FadeTransition(
-              opacity: Tween<double>(begin: 0, end: 1).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.ease)),
-              child: Transform.scale(
-                scale: 2.5,
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        ]),
+        ],
+      ),
+      body: BookListMenu(
+        onPressed: (index) {
+          context.read<BookData>().openPage(index);
+          Navigator.pushNamed(context, BookDisplay.id);
+        },
       ),
     );
   }

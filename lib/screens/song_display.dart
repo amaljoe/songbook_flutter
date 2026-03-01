@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_display_pager.dart';
-import 'package:songbook_flutter/components/song_title_header.dart';
-import 'package:songbook_flutter/components/toolbar.dart';
+import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -12,69 +12,37 @@ class SongDisplay extends StatefulWidget {
   _SongDisplayState createState() => _SongDisplayState();
 }
 
-class _SongDisplayState extends State<SongDisplay>
-    with TickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Tween<Offset> _tweenOffsetLyrics;
-  late Tween<Offset> _tweenOffsetToolbar;
-  late Animation<Offset> _offSetAnimationLyrics;
-  late Animation<Offset> _offSetAnimationToolbar;
-  Curve _curve = ElasticOutCurve(0.7);
-
+class _SongDisplayState extends State<SongDisplay> {
   @override
   void initState() {
     super.initState();
     WakelockPlus.enable();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0.4, 0), end: Offset.zero);
-    _tweenOffsetToolbar =
-        Tween<Offset>(begin: Offset(0, -0.7), end: Offset.zero);
-    _offSetAnimationLyrics = _tweenOffsetLyrics
-        .animate(CurvedAnimation(parent: _animationController, curve: _curve));
-    _offSetAnimationToolbar = _tweenOffsetToolbar
-        .animate(CurvedAnimation(parent: _animationController, curve: _curve));
-    _animationController.forward();
   }
 
   @override
   void dispose() {
-    super.dispose();
     WakelockPlus.disable();
-    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(children: [
-          SlideTransition(
-            position: _offSetAnimationLyrics,
-            child: SongDisplayPager(),
+      appBar: AppBar(
+        title: Consumer<SongData>(
+          builder: (_, data, __) {
+            final song = data.songs?[data.activeSong ?? 0];
+            return Text(song?.titleEng ?? '');
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => Navigator.pushNamed(context, SongSearch.id),
           ),
-          SlideTransition(
-            position: _offSetAnimationToolbar,
-            child: Toolbar(
-              type: ToolbarType.song,
-              navigationIcon: Icon(Icons.arrow_back),
-              onIconPressed: () {
-                Navigator.pop(context);
-              },
-              onSearchPressed: () {
-                Navigator.pushNamed(context, SongSearch.id).then((newSong) {
-                  if (newSong == true) {
-                    _animationController.value = 0;
-                    _animationController.forward();
-                  }
-                });
-              },
-              childHeader: SongTitleHeader(),
-            ),
-          ),
-        ]),
+        ],
       ),
+      body: SongDisplayPager(),
     );
   }
 }

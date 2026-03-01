@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:songbook_flutter/models/book_data.dart';
-import 'package:songbook_flutter/models/song_data.dart';
 import 'package:provider/provider.dart';
+import 'package:songbook_flutter/models/book_data.dart';
+import 'package:songbook_flutter/models/settings_data.dart';
+import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/home_screen.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
@@ -14,6 +15,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   Future<void> _loading() async {
+    await context.read<SettingsData>().load();
     await context.read<SongData>().loadDatabase();
     await context.read<BookData>().loadDatabase();
     if (!mounted) return;

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-double kSongToolbarHeight = 150.0;
-double kToolbarBorderRadius = 30.0;
-double kBottomNavigationBarRadius = 50.0;
 int kStarting = 101;
 
 const Color kAccentColor = Color(0xFF1565C0); // Deep blue
+
+const double kSmallTextSizeFactor = 0.85;
+const double kMediumTextSizeFactor = 1.0;
+const double kLargeTextSizeFactor = 1.2;
 
 TextStyle kPageNumberStyle = TextStyle(
   fontSize: 20,
