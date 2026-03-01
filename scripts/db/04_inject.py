@@ -23,6 +23,16 @@ def _read_html(rel_path):
         return f.read()
 
 
+def _resolve_html(entry, kind):
+    """Prefer LLM-generated HTML if available, fall back to rule-based."""
+    llm_path = os.path.join(
+        PROJECT_ROOT, 'data', 'processed', 'llm', kind, f"{entry['id']:03d}.html"
+    )
+    if os.path.exists(llm_path):
+        return llm_path, True
+    return os.path.join(PROJECT_ROOT, entry['html']), False
+
+
 if __name__ == '__main__':
     if not os.path.exists(INDEX_PATH):
         print(f'ERROR: {INDEX_PATH} not found — run Step 3 first.')
@@ -67,14 +77,24 @@ if __name__ == '__main__':
             lyrics   TEXT NOT NULL
         )
     ''')
+    llm_count = std_count = 0
     for entry in songs:
+        html_path, is_llm = _resolve_html(entry, 'songs')
+        tag = '[llm]' if is_llm else '[std]'
+        if is_llm:
+            llm_count += 1
+        else:
+            std_count += 1
+        with open(html_path, 'r', encoding='utf-8') as f:
+            lyrics = f.read()
         cur.execute(
             'INSERT INTO songs (songId, title, titleEng, lyrics) VALUES (?, ?, ?, ?)',
-            (entry['id'], entry['title'], entry.get('titleEng', entry['title']), _read_html(entry['html'])),
+            (entry['id'], entry['title'], entry.get('titleEng', entry['title']), lyrics),
         )
+        print(f'  {tag} #{entry["id"]:03d} {entry["title"]}')
     conn.commit()
     conn.close()
-    print(f'✓ songs_database.db — {len(songs)} songs')
+    print(f'✓ songs_database.db — {len(songs)} songs ({llm_count} llm, {std_count} std)')
 
     # ── books_database.db ──────────────────────────────────────────────────────
     books_db = os.path.join(ASSETS_DIR, 'books_database.db')
@@ -89,13 +109,23 @@ if __name__ == '__main__':
             page    TEXT NOT NULL
         )
     ''')
+    llm_lit = std_lit = 0
     for entry in liturgy:
+        html_path, is_llm = _resolve_html(entry, 'liturgy')
+        tag = '[llm]' if is_llm else '[std]'
+        if is_llm:
+            llm_lit += 1
+        else:
+            std_lit += 1
+        with open(html_path, 'r', encoding='utf-8') as f:
+            page = f.read()
         cur.execute(
             'INSERT INTO books (pageId, title, page) VALUES (?, ?, ?)',
-            (entry['id'], entry['title'], _read_html(entry['html'])),
+            (entry['id'], entry['title'], page),
         )
+        print(f'  {tag} #{entry["id"]:03d} {entry["title"]}')
     conn.commit()
     conn.close()
-    print(f'✓ books_database.db — {len(liturgy)} liturgy sections')
+    print(f'✓ books_database.db — {len(liturgy)} liturgy sections ({llm_lit} llm, {std_lit} std)')
 
     print('Done.')

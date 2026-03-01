@@ -11,6 +11,7 @@ class BookDisplayList extends StatelessWidget {
     final pages = context.watch<BookData>().pages;
     final activePage = context.watch<BookData>().activePage;
     final textSizeFactor = context.watch<SettingsData>().textSizeFactor;
+    final lineSpacingFactor = context.watch<SettingsData>().lineSpacingFactor;
 
     if (pages == null || activePage == null) {
       return Center(child: CircularProgressIndicator());
@@ -47,12 +48,16 @@ class BookDisplayList extends StatelessWidget {
                   'body': Style(
                     fontFamily: 'roboto',
                     fontSize: FontSize(16 * textSizeFactor),
-                    lineHeight: LineHeight(1.6),
+                    lineHeight: LineHeight(lineSpacingFactor),
                   ),
                   'em': Style(
                     color: Theme.of(context).colorScheme.primary,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w600,
+                  ),
+                  'strong': Style(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.w700,
                   ),
                   'h3': Style(
                     color: Theme.of(context).colorScheme.primary,

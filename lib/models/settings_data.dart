@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:songbook_flutter/utilities/constants.dart';
 
 class SettingsData extends ChangeNotifier {
   static const _keyThemeMode = 'themeMode';
   static const _keyTextSize = 'textSizeFactor';
+  static const _keyLineSpacing = 'lineSpacing';
 
   ThemeMode themeMode = ThemeMode.system;
   double textSizeFactor = 1.0;
+  double lineSpacingFactor = kNormalLineSpacing;
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -16,6 +19,7 @@ class SettingsData extends ChangeNotifier {
       _ => ThemeMode.system,
     };
     textSizeFactor = prefs.getDouble(_keyTextSize) ?? 1.0;
+    lineSpacingFactor = prefs.getDouble(_keyLineSpacing) ?? kNormalLineSpacing;
     notifyListeners();
   }
 
@@ -30,6 +34,13 @@ class SettingsData extends ChangeNotifier {
     textSizeFactor = factor;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble(_keyTextSize, factor);
+    notifyListeners();
+  }
+
+  Future<void> setLineSpacing(double factor) async {
+    lineSpacingFactor = factor;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_keyLineSpacing, factor);
     notifyListeners();
   }
 }

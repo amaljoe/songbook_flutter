@@ -24,6 +24,7 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
   @override
   Widget build(BuildContext context) {
     final textSizeFactor = context.watch<SettingsData>().textSizeFactor;
+    final lineSpacingFactor = context.watch<SettingsData>().lineSpacingFactor;
     int songNum = context.read<SongData>().activeSong ?? 0;
     if (_controller.hasClients && _controller.page != songNum) {
       _controller.jumpToPage(songNum);
@@ -46,20 +47,24 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
                   'body': Style(
                     fontFamily: 'roboto',
                     fontSize: FontSize(18 * textSizeFactor),
-                    lineHeight: LineHeight(1.6),
+                    lineHeight: LineHeight(lineSpacingFactor),
                   ),
-                  'b': Style(
-                    fontWeight: FontWeight.w800,
+                  'em': Style(
+                    color: Theme.of(context).colorScheme.outline,
+                    fontStyle: FontStyle.italic,
+                    fontSize: FontSize(14 * textSizeFactor),
                   ),
                   'h4': Style(
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
                   ),
                   'h3': Style(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.outline,
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
-                    margin: Margins.symmetric(vertical: 8),
+                    fontSize: FontSize(16 * textSizeFactor),
+                    fontStyle: FontStyle.italic,
+                    // margin: Margins.symmetric(vertical: 8),
                   ),
                 },
               ),

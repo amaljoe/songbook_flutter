@@ -82,6 +82,54 @@ class SettingsScreen extends StatelessWidget {
                   context.read<SettingsData>().setTextSizeFactor(s.first),
             ),
           ),
+          Divider(),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Text(
+              'Reading',
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 4, 16, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Line Spacing',
+                    style: Theme.of(context).textTheme.bodyLarge),
+                SizedBox(height: 2),
+                Text('Space between lines of lyrics',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        )),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  child: SegmentedButton<double>(
+                    segments: [
+                      ButtonSegment(
+                        value: kCompactLineSpacing,
+                        label: Text('Compact'),
+                      ),
+                      ButtonSegment(
+                        value: kNormalLineSpacing,
+                        label: Text('Normal'),
+                      ),
+                      ButtonSegment(
+                        value: kSpaciousLineSpacing,
+                        label: Text('Spacious'),
+                      ),
+                    ],
+                    selected: {settings.lineSpacingFactor},
+                    onSelectionChanged: (s) =>
+                        context.read<SettingsData>().setLineSpacing(s.first),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

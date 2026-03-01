@@ -6,6 +6,10 @@ const double kSmallTextSizeFactor = 0.85;
 const double kMediumTextSizeFactor = 1.0;
 const double kLargeTextSizeFactor = 1.2;
 
+const double kCompactLineSpacing = 1.3;
+const double kNormalLineSpacing = 1.6;
+const double kSpaciousLineSpacing = 2.0;
+
 TextStyle kPageNumberStyle = TextStyle(
   fontSize: 20,
   color: Colors.black54,
