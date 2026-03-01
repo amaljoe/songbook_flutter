@@ -33,7 +33,7 @@ class _SongDisplayState extends State<SongDisplay> {
           builder: (_, data, __) {
             final song = data.songs?[data.activeSong ?? 0];
             if (song == null) return Text('');
-            return Text('${song.songId} · ${song.titleEng}');
+            return Text('${song.songId} · ${song.title}');
           },
         ),
         actions: [

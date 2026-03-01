@@ -12,7 +12,7 @@ class BookMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Liturgy'),
+        title: Text('ആരാധനാക്രമങ്ങൾ'),
         actions: [
           IconButton(
             icon: Icon(Icons.settings_outlined),

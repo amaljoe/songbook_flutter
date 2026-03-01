@@ -10,7 +10,8 @@ class SongListMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Scrollbar(
+      child: ListView.builder(
       itemCount: context.select<SongData, int>((value) => value.songs?.length ?? 0),
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -22,6 +23,7 @@ class SongListMenu extends StatelessWidget {
           ),
         );
       },
+      ),
     );
   }
 }

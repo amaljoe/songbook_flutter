@@ -130,6 +130,39 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
+          Divider(),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Text(
+              'Preview',
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 4, 16, 24),
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+              ),
+              child: Text(
+                'പല്ലവി\nദൈവമേ നിൻ ദയ മഹത്വം\nആരുണർത്തി പാടിടും\nനന്ദിയോടെ ഞങ്ങൾ വാഴ്ത്തിടും',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 18 * settings.textSizeFactor,
+                  height: settings.lineSpacingFactor,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

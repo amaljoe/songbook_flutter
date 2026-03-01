@@ -12,7 +12,7 @@ class SongMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Songbook'),
+        title: Text('പാട്ടു പുസ്തകം'),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
