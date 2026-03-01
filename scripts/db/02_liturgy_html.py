@@ -20,29 +20,48 @@ def lines_of(text):
     return [line.rstrip() for line in text.splitlines()]
 
 
+_ROMAN = re.compile(r'^[IVX]+$')
+
+_RUBRIC = re.compile(r'\[([^\]]*)\]')
+
+
+def _format_line(text):
+    """Apply [rubric] → <em> colouring to a single line of text."""
+    return _RUBRIC.sub(r'<em>[\1]</em>', text)
+
+
 def format_liturgy_html(lines):
     """
-    Paragraphs separated by blank lines.
-    Bracketed rubrics [text] → <em>[text]</em>.
-    """
-    html_parts   = []
-    current_para = []
+    One <p> per non-blank line — preserves every speaker exchange and
+    instruction on its own line exactly as in the source.
 
-    def flush_para():
-        if current_para:
-            text = ' '.join(current_para).strip()
-            text = re.sub(r'\[([^\]]*)\]', r'<em>[\1]</em>', text)
-            html_parts.append(f'<p>{text}</p>')
-            current_para.clear()
+    Blank lines become a <p>&nbsp;</p> spacer; consecutive blank lines
+    collapse to one spacer. Roman-numeral section headers (I, II, III …)
+    are bolded. [rubric] text is wrapped in <em>.
+    """
+    html_parts  = []
+    last_spacer = True   # suppress leading spacers
 
     for line in lines:
         stripped = line.strip()
-        if not stripped:
-            flush_para()
-        else:
-            current_para.append(stripped)
 
-    flush_para()
+        if not stripped:
+            if not last_spacer:
+                html_parts.append('<p>&nbsp;</p>')
+                last_spacer = True
+            continue
+
+        last_spacer = False
+
+        if _ROMAN.match(stripped):
+            html_parts.append(f'<h3>{stripped}</h3>')
+        else:
+            html_parts.append(f'<p>{_format_line(stripped)}</p>')
+
+    # remove trailing spacer
+    if html_parts and html_parts[-1] == '<p>&nbsp;</p>':
+        html_parts.pop()
+
     return ''.join(html_parts)
 
 

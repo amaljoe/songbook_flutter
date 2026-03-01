@@ -51,6 +51,12 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
                   'b': Style(
                     fontWeight: FontWeight.w800,
                   ),
+                  'h3': Style(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    textAlign: TextAlign.center,
+                    margin: Margins.symmetric(vertical: 8),
+                  ),
                 },
               ),
             ],

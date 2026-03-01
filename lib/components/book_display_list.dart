@@ -50,8 +50,15 @@ class BookDisplayList extends StatelessWidget {
                     lineHeight: LineHeight(1.6),
                   ),
                   'em': Style(
-                    color: Colors.blueGrey.shade600,
+                    color: Theme.of(context).colorScheme.primary,
                     fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  'h3': Style(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    textAlign: TextAlign.center,
+                    margin: Margins.symmetric(vertical: 12),
                   ),
                 },
               ),

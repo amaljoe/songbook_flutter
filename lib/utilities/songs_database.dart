@@ -12,20 +12,17 @@ class SongsDatabase {
     WidgetsFlutterBinding.ensureInitialized();
     var databasesPath = await getDatabasesPath();
     var path = join(databasesPath, 'songs_database.db');
-    var exists = await databaseExists(path);
+    try {
+      await Directory(dirname(path)).create(recursive: true);
+    } catch (_) {}
 
-    if (!exists) {
-      try {
-        await Directory(dirname(path)).create(recursive: true);
-      } catch (_) {}
+    // Always overwrite from assets — the DB is read-only app content.
+    ByteData data =
+        await rootBundle.load(join("assets", "songs_database.db"));
+    List<int> bytes =
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    await File(path).writeAsBytes(bytes, flush: true);
 
-      ByteData data =
-          await rootBundle.load(join("assets", "songs_database.db"));
-      List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-
-      await File(path).writeAsBytes(bytes, flush: true);
-    }
     _database = await openDatabase(path);
   }
 
