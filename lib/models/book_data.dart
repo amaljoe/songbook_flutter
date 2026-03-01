@@ -19,7 +19,6 @@ class BookData extends ChangeNotifier {
   Future<void> loadDatabase() async {
     await booksDatabase.openBooksDatabase();
     pages = await booksDatabase.getAllPages();
-    print('books loaded');
     notifyListeners();
   }
 }

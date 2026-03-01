@@ -66,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen>
                 });
               },
               currentIndex: currentScreen,
+              selectedItemColor: kAccentColor,
+              unselectedItemColor: Colors.grey.shade500,
               items: [
                 BottomNavigationBarItem(
                     label: 'പാട്ടുപുസ്തകം',

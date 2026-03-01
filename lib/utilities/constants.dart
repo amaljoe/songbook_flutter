@@ -5,6 +5,8 @@ double kToolbarBorderRadius = 30.0;
 double kBottomNavigationBarRadius = 50.0;
 int kStarting = 101;
 
+const Color kAccentColor = Color(0xFF1565C0); // Deep blue
+
 TextStyle kPageNumberStyle = TextStyle(
   fontSize: 20,
   color: Colors.black54,
@@ -36,3 +38,16 @@ TextStyle kHeaderTextStyle = TextStyle(fontFamily: 'Pacifico', fontSize: 36);
 
 TextStyle kWelcomeHeaderTextStyle =
     TextStyle(fontFamily: 'Pacifico', fontSize: 44);
+
+TextStyle kSubtitleTextStyle = TextStyle(
+  fontFamily: 'roboto',
+  fontSize: 18,
+  color: Colors.white70,
+  letterSpacing: 1.2,
+);
+
+TextStyle kLiturgyTitleTextStyle = TextStyle(
+  fontFamily: 'roboto',
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);

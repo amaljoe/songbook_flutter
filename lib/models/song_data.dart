@@ -20,7 +20,6 @@ class SongData extends ChangeNotifier {
     } else {
       searchSongs = await songsDatabase.getSearchSongs(searchText);
     }
-    print('search songs loaded');
     notifyListeners();
   }
 
@@ -32,7 +31,6 @@ class SongData extends ChangeNotifier {
 
   //clear search results especially after a search is completed or abandoned halfway
   void clearSearch() {
-    print('clearing search');
     searchSongs = [];
     notifyListeners();
   }
@@ -41,7 +39,6 @@ class SongData extends ChangeNotifier {
   Future<void> loadDatabase() async {
     await songsDatabase.openSongsDatabase();
     songs = await songsDatabase.getAllSongs();
-    print('songs loaded');
     notifyListeners();
   }
 }

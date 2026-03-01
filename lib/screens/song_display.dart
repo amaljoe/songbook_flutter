@@ -24,7 +24,6 @@ class _SongDisplayState extends State<SongDisplay>
   @override
   void initState() {
     super.initState();
-    print('enable wakelock');
     WakelockPlus.enable();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
@@ -41,7 +40,6 @@ class _SongDisplayState extends State<SongDisplay>
   @override
   void dispose() {
     super.dispose();
-    print('disable wakelock');
     WakelockPlus.disable();
     _animationController.dispose();
   }

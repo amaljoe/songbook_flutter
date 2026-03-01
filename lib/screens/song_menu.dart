@@ -52,8 +52,6 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
               color: Colors.white,
               child: SongListMenu(
                 onPressed: (index) {
-                  print(
-                      'item ${context.read<SongData>().songs![index].songId - kStarting} pressed');
                   context.read<SongData>().openSong(
                       context.read<SongData>().songs![index].songId - kStarting);
                   widget.onTap?.call();
@@ -66,7 +64,6 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                         Navigator.pushNamed(context, SongDisplay.id)
                             .whenComplete(() {
                           widget.onReturn?.call();
-                          print('menu animation restored');
                           allowNavigation = true;
                           animation.value = 0;
                         });

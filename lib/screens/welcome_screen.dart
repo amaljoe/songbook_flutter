@@ -14,10 +14,8 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   Future<void> _loading() async {
-    print('entered main loading');
     await context.read<SongData>().loadDatabase();
     await context.read<BookData>().loadDatabase();
-    print('exiting main loading');
     if (!mounted) return;
     Navigator.pushReplacementNamed(context, HomeScreen.id);
   }
@@ -32,10 +30,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF1A237E), Color(0xFF1565C0)],
+          ),
+        ),
         child: Center(
-          child: Text(
-            'Songbook',
-            style: kWelcomeHeaderTextStyle,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.library_music,
+                size: 72,
+                color: Colors.white70,
+              ),
+              SizedBox(height: 24),
+              Text(
+                'CSI Songbook',
+                style: kWelcomeHeaderTextStyle.copyWith(color: Colors.white),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Christian Service Institute',
+                style: kSubtitleTextStyle,
+              ),
+            ],
           ),
         ),
       ),

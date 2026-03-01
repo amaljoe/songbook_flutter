@@ -5,11 +5,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/song_item.dart';
 
-//helper class dealing with songs database
 class SongsDatabase {
   Database? _database;
 
-  //opens songs database
   Future<void> openSongsDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
     var databasesPath = await getDatabasesPath();
@@ -17,7 +15,6 @@ class SongsDatabase {
     var exists = await databaseExists(path);
 
     if (!exists) {
-      print("Creating new copy from asset");
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
@@ -28,15 +25,11 @@ class SongsDatabase {
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       await File(path).writeAsBytes(bytes, flush: true);
-    } else {
-      print("Opening existing database");
     }
     _database = await openDatabase(path);
   }
 
-  //get all songs in the database
   Future<List<SongItem>> getAllSongs() async {
-    print('getting all songs');
     final List<Map<String, dynamic>> maps = await _database!.query('songs');
     return List.generate(maps.length, (index) {
       return SongItem(
@@ -48,7 +41,6 @@ class SongsDatabase {
     });
   }
 
-  //query through song titles
   Future<List<SongItem>> getSearchSongs(String searchText) async {
     if (searchText == '') {
       return [];
@@ -65,7 +57,6 @@ class SongsDatabase {
     });
   }
 
-  //get song by number
   Future<List<SongItem>> getSearchSongsByNum(String searchText) async {
     if (searchText == '') {
       return [];

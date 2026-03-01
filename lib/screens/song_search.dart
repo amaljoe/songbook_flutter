@@ -36,7 +36,6 @@ class _SongSearchState extends State<SongSearch>
 
   void gotoSong(int index) async {
     index -= kStarting;
-    print('item $index pressed');
     context.read<SongData>().openSong(index);
     if (widget.fromHome) {
       Navigator.pushReplacementNamed(context, SongDisplay.id);
