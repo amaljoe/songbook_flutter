@@ -7,13 +7,13 @@ import '../utilities/constants.dart';
 class SongListMenu extends StatelessWidget {
   final Function onPressed;
 
-  SongListMenu({@required this.onPressed});
+  SongListMenu({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     double topPadding;
     return ListView.builder(
-      itemCount: context.select<SongData, int>((value) => value.songs.length),
+      itemCount: context.select<SongData, int>((value) => value.songs?.length ?? 0),
       itemBuilder: (context, index) {
         if (index == 0) {
           topPadding = kToolbarBorderRadius;
@@ -27,7 +27,7 @@ class SongListMenu extends StatelessWidget {
               onPressed(index);
             },
             child: SongItemWidget(
-              songItem: context.read<SongData>().songs[index],
+              songItem: context.read<SongData>().songs![index],
             ),
           ),
         );

@@ -3,7 +3,7 @@ import 'package:songbook_flutter/components/song_display_pager.dart';
 import 'package:songbook_flutter/components/song_title_header.dart';
 import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class SongDisplay extends StatefulWidget {
   static const String id = 'song_display/';
@@ -14,18 +14,18 @@ class SongDisplay extends StatefulWidget {
 
 class _SongDisplayState extends State<SongDisplay>
     with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Tween<Offset> _tweenOffsetLyrics;
-  Tween<Offset> _tweenOffsetToolbar;
-  Animation<Offset> _offSetAnimationLyrics;
-  Animation<Offset> _offSetAnimationToolbar;
+  late AnimationController _animationController;
+  late Tween<Offset> _tweenOffsetLyrics;
+  late Tween<Offset> _tweenOffsetToolbar;
+  late Animation<Offset> _offSetAnimationLyrics;
+  late Animation<Offset> _offSetAnimationToolbar;
   Curve _curve = ElasticOutCurve(0.7);
 
   @override
   void initState() {
     super.initState();
     print('enable wakelock');
-    Wakelock.enable();
+    WakelockPlus.enable();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _tweenOffsetLyrics = Tween<Offset>(begin: Offset(0.4, 0), end: Offset.zero);
@@ -42,7 +42,7 @@ class _SongDisplayState extends State<SongDisplay>
   void dispose() {
     super.dispose();
     print('disable wakelock');
-    Wakelock.disable();
+    WakelockPlus.disable();
     _animationController.dispose();
   }
 
@@ -66,7 +66,7 @@ class _SongDisplayState extends State<SongDisplay>
               },
               onSearchPressed: () {
                 Navigator.pushNamed(context, SongSearch.id).then((newSong) {
-                  if (newSong != null && newSong) {
+                  if (newSong == true) {
                     _animationController.value = 0;
                     _animationController.forward();
                   }

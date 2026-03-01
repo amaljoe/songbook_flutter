@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 
 class Toolbar extends StatelessWidget {
   final navigationIcon;
   final ToolbarType type;
-  final Function onIconPressed;
-  final Widget childHeader;
-  final Function onSearchPressed;
+  final VoidCallback onIconPressed;
+  final Widget? childHeader;
+  final VoidCallback onSearchPressed;
 
   Toolbar({
-    @required this.navigationIcon,
-    @required this.onIconPressed,
-    @required this.type,
-    @required this.childHeader,
-    @required this.onSearchPressed,
+    required this.navigationIcon,
+    required this.onIconPressed,
+    required this.type,
+    required this.childHeader,
+    required this.onSearchPressed,
   });
   @override
   Widget build(BuildContext context) {

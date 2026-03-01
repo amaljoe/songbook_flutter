@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../utilities/constants.dart';
 
 class SearchBar extends StatelessWidget {
-  final Function onPressed;
-  final Function onTextChanged;
+  final VoidCallback onPressed;
+  final ValueChanged<String> onTextChanged;
   final bool autoFocus;
   final String text;
 
   SearchBar({
-    @required this.text,
-    @required this.onPressed,
-    @required this.onTextChanged,
-    @required this.autoFocus,
+    required this.text,
+    required this.onPressed,
+    required this.onTextChanged,
+    required this.autoFocus,
   });
 
   @override

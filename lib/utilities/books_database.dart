@@ -4,11 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:songbook_flutter/models/book_item.dart';
 import 'package:sqflite/sqflite.dart';
-import '../models/song_item.dart';
-
-//helper class dealing with songs database
+//helper class dealing with books database
 class BooksDatabase {
-  Database _database;
+  Database? _database;
 
   //opens songs database
   Future<void> openBooksDatabase() async {
@@ -32,13 +30,13 @@ class BooksDatabase {
     } else {
       print("Opening existing database");
     }
-    _database = await openDatabase(path, readOnly: true);
+    _database = await openDatabase(path);
   }
 
   //get all songs in the database
   Future<List<BookItem>> getAllPages() async {
     print('getting all pages');
-    final List<Map<String, dynamic>> maps = await _database.query('books');
+    final List<Map<String, dynamic>> maps = await _database!.query('books');
     return List.generate(maps.length, (index) {
       return BookItem(
         pageId: maps[index]['pageId'],

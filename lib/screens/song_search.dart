@@ -1,24 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:songbook_flutter/components/search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_search.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
-import 'package:string_validator/string_validator.dart';
 
 class SongSearch extends StatefulWidget {
   final bool fromHome;
   static const String idFromHome = 'song_search_home';
   static const String id = 'song_search';
-  SongSearch({@required this.fromHome});
+  SongSearch({required this.fromHome});
   @override
   _SongSearchState createState() => _SongSearchState();
 }
 
 class _SongSearchState extends State<SongSearch>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -75,7 +74,7 @@ class _SongSearchState extends State<SongSearch>
                         text: 'Search song title or number',
                         onPressed: () {},
                         onTextChanged: (String searchText) async {
-                          if (isNumeric(searchText) && searchText.length == 3) {
+                          if (int.tryParse(searchText) != null && searchText.length == 3) {
                             int num = int.parse(searchText);
                             gotoSong(num);
                           } else {

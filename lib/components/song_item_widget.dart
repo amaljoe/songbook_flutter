@@ -6,7 +6,7 @@ class SongItemWidget extends StatelessWidget {
   final SongItem songItem;
 
   SongItemWidget({
-    @required this.songItem,
+    required this.songItem,
   });
 
   @override

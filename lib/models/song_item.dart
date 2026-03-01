@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class SongItem {
   final int songId;
   final String title;
@@ -7,10 +5,10 @@ class SongItem {
   final String lyrics;
 
   SongItem({
-    @required this.songId,
-    @required this.title,
-    @required this.titleEng,
-    @required this.lyrics,
+    required this.songId,
+    required this.title,
+    required this.titleEng,
+    required this.lyrics,
   });
 
   Map<String, dynamic> toMap() {

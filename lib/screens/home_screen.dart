@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/utilities/constants.dart';
 import 'package:songbook_flutter/screens/song_menu.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
 
 import 'book_menu.dart';
 
@@ -13,9 +12,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
   int currentScreen = 0;
-  Animation animation;
+  late Animation<Offset> animation;
 
   @override
   void initState() {
@@ -69,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen>
               currentIndex: currentScreen,
               items: [
                 BottomNavigationBarItem(
-                    title: Text('പാട്ടുപുസ്തകം '),
+                    label: 'പാട്ടുപുസ്തകം',
                     icon: Icon(Icons.library_music)),
                 BottomNavigationBarItem(
-                    title: Text('ആരാധനക്രമം'), icon: Icon(Icons.library_books))
+                    label: 'ആരാധനക്രമം', icon: Icon(Icons.library_books))
               ],
             ),
           ),

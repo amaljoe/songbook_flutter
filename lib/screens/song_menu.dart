@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_menu.dart';
@@ -10,8 +9,8 @@ import 'package:songbook_flutter/utilities/constants.dart';
 
 class SongMenu extends StatefulWidget {
   static const String id = 'song_menu';
-  final Function onTap;
-  final Function onReturn;
+  final Function? onTap;
+  final Function? onReturn;
 
   SongMenu({this.onTap, this.onReturn});
 
@@ -20,8 +19,8 @@ class SongMenu extends StatefulWidget {
 }
 
 class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
-  AnimationController _navController;
-  AnimationController animation;
+  late AnimationController _navController;
+  late AnimationController animation;
   bool allowNavigation = true;
 
   @override
@@ -54,10 +53,10 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
               child: SongListMenu(
                 onPressed: (index) {
                   print(
-                      'item ${context.read<SongData>().songs[index].songId - kStarting} pressed');
+                      'item ${context.read<SongData>().songs![index].songId - kStarting} pressed');
                   context.read<SongData>().openSong(
-                      context.read<SongData>().songs[index].songId - kStarting);
-                  widget.onTap();
+                      context.read<SongData>().songs![index].songId - kStarting);
+                  widget.onTap?.call();
                   animation.forward();
                   animation.addStatusListener(
                     (status) async {
@@ -66,7 +65,7 @@ class _SongMenuState extends State<SongMenu> with TickerProviderStateMixin {
                         allowNavigation = false;
                         Navigator.pushNamed(context, SongDisplay.id)
                             .whenComplete(() {
-                          widget.onReturn();
+                          widget.onReturn?.call();
                           print('menu animation restored');
                           allowNavigation = true;
                           animation.value = 0;

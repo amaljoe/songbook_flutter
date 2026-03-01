@@ -8,7 +8,7 @@ class BookDisplayList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: context.watch<BookData>().pages.length,
+        itemCount: context.watch<BookData>().pages?.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -38,7 +38,7 @@ class BookDisplayList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Html(data: context.watch<BookData>().pages[index].page),
+                    Html(data: context.watch<BookData>().pages![index].page),
                   ],
                 ),
               ),

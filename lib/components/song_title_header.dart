@@ -12,8 +12,8 @@ class SongTitleHeader extends StatelessWidget {
       child: Center(
         child: SongItemWidget(
             songItem: context
-                    .select<SongData, List<SongItem>>((value) => value.songs)[
-                context.select<SongData, int>((value) => value.activeSong)]),
+                    .select<SongData, List<SongItem>?>((value) => value.songs)![
+                context.select<SongData, int?>((value) => value.activeSong) ?? 0]),
       ),
     );
   }

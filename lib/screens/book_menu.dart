@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:songbook_flutter/components/toolbar.dart';
 import 'package:songbook_flutter/screens/book_display.dart';
@@ -13,8 +12,8 @@ class BookMenu extends StatefulWidget {
 }
 
 class _BookMenuState extends State<BookMenu> with TickerProviderStateMixin {
-  AnimationController _controller;
-  AnimationController animation;
+  late AnimationController _controller;
+  late AnimationController animation;
   bool allowNavigation = true;
 
   @override

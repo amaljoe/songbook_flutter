@@ -1,0 +1,35 @@
+PODS:
+  - Flutter (1.0.0)
+  - package_info_plus (0.4.5):
+    - Flutter
+  - sqflite_darwin (0.0.4):
+    - Flutter
+    - FlutterMacOS
+  - wakelock_plus (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
+  wakelock_plus:
+    :path: ".symlinks/plugins/wakelock_plus/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+  wakelock_plus: 04623e3f525556020ebd4034310f20fe7fda8b49
+
+PODFILE CHECKSUM: 0a7d5b7d0e53420cb0284f7b2f171f93843b94d2
+
+COCOAPODS: 1.16.2

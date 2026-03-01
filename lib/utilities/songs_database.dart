@@ -7,7 +7,7 @@ import '../models/song_item.dart';
 
 //helper class dealing with songs database
 class SongsDatabase {
-  Database _database;
+  Database? _database;
 
   //opens songs database
   Future<void> openSongsDatabase() async {
@@ -31,13 +31,13 @@ class SongsDatabase {
     } else {
       print("Opening existing database");
     }
-    _database = await openDatabase(path, readOnly: true);
+    _database = await openDatabase(path);
   }
 
   //get all songs in the database
   Future<List<SongItem>> getAllSongs() async {
     print('getting all songs');
-    final List<Map<String, dynamic>> maps = await _database.query('songs');
+    final List<Map<String, dynamic>> maps = await _database!.query('songs');
     return List.generate(maps.length, (index) {
       return SongItem(
         songId: maps[index]['songId'],
@@ -50,10 +50,10 @@ class SongsDatabase {
 
   //query through song titles
   Future<List<SongItem>> getSearchSongs(String searchText) async {
-    if (searchText == null || searchText == '') {
+    if (searchText == '') {
       return [];
     }
-    final List<Map<String, dynamic>> maps = await _database
+    final List<Map<String, dynamic>> maps = await _database!
         .query('songs', where: 'titleEng like ?', whereArgs: ['$searchText%']);
     return List.generate(maps.length, (index) {
       return SongItem(
@@ -67,10 +67,10 @@ class SongsDatabase {
 
   //get song by number
   Future<List<SongItem>> getSearchSongsByNum(String searchText) async {
-    if (searchText == null || searchText == '') {
+    if (searchText == '') {
       return [];
     }
-    final List<Map<String, dynamic>> maps = await _database
+    final List<Map<String, dynamic>> maps = await _database!
         .query('songs', where: 'songId like ?', whereArgs: ['$searchText%']);
     return List.generate(maps.length, (index) {
       return SongItem(

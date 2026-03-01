@@ -7,19 +7,15 @@ import 'package:songbook_flutter/models/song_data.dart';
 class SongListSearch extends StatelessWidget {
   final Function onPressed;
 
-  SongListSearch({@required this.onPressed});
+  SongListSearch({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     double topPadding;
     return ListView.builder(
-      itemCount: context.select<SongData, List<SongItem>>(
-                  (value) => value.searchSongs) ==
-              null
-          ? 0
-          : context
-              .select<SongData, List<SongItem>>((value) => value.searchSongs)
-              .length,
+      itemCount: context
+          .select<SongData, List<SongItem>>((value) => value.searchSongs)
+          .length,
       itemBuilder: (context, index) {
         if (index == 0) {
           topPadding = 10;
