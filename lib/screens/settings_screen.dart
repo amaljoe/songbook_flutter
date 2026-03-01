@@ -153,7 +153,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'പല്ലവി\nദൈവമേ നിൻ ദയ മഹത്വം\nആരുണർത്തി പാടിടും\nനന്ദിയോടെ ഞങ്ങൾ വാഴ്ത്തിടും',
+                'ഉണര്‍വ്വിന്‍ വരം ലഭിപ്പാന്‍\nഞങ്ങള്‍ വരുന്നൂ തിരുസവിധേ\nനാഥാ - നിന്‍റെ വന്‍ കൃപകള്‍\nഞങ്ങള്‍ക്കരുളൂ അനുഗ്രഹിക്കൂ',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 18 * settings.textSizeFactor,
