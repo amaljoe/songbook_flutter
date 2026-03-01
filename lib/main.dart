@@ -11,11 +11,14 @@ import 'package:songbook_flutter/screens/welcome_screen.dart';
 import 'models/song_data.dart';
 import 'screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final settings = SettingsData();
+  await settings.load();
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<SettingsData>(create: (_) => SettingsData()),
+        ChangeNotifierProvider<SettingsData>.value(value: settings),
         ChangeNotifierProvider<SongData>(create: (_) => SongData()),
         ChangeNotifierProvider<BookData>(create: (_) => BookData()),
       ],
