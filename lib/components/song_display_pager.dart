@@ -57,6 +57,7 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
                   'h4': Style(
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
+                    fontSize: FontSize(14 * textSizeFactor),
                   ),
                   'h3': Style(
                     color: Theme.of(context).colorScheme.outline,
@@ -64,7 +65,6 @@ class _SongDisplayPagerState extends State<SongDisplayPager> {
                     textAlign: TextAlign.center,
                     fontSize: FontSize(16 * textSizeFactor),
                     fontStyle: FontStyle.italic,
-                    // margin: Margins.symmetric(vertical: 8),
                   ),
                 },
               ),
