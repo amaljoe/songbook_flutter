@@ -5,8 +5,6 @@ import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/settings_screen.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
 import 'package:songbook_flutter/screens/song_search.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
-
 class SongMenu extends StatelessWidget {
   static const String id = 'song_menu';
 
@@ -30,8 +28,7 @@ class SongMenu extends StatelessWidget {
       ),
       body: SongListMenu(
         onPressed: (index) {
-          context.read<SongData>().openSong(
-              context.read<SongData>().songs![index].songId - kStarting);
+          context.read<SongData>().openSong(index);
           Navigator.pushNamed(context, SongDisplay.id);
         },
       ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-int kStarting = 101;
-
 const Color kAccentColor = Color(0xFF1565C0); // Deep blue
 
 const double kSmallTextSizeFactor = 0.85;

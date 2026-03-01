@@ -32,7 +32,8 @@ class _SongDisplayState extends State<SongDisplay> {
         title: Consumer<SongData>(
           builder: (_, data, __) {
             final song = data.songs?[data.activeSong ?? 0];
-            return Text(song?.titleEng ?? '');
+            if (song == null) return Text('');
+            return Text('${song.songId} · ${song.titleEng}');
           },
         ),
         actions: [

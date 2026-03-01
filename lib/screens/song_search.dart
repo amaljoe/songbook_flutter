@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:songbook_flutter/components/song_list_search.dart';
 import 'package:songbook_flutter/models/song_data.dart';
 import 'package:songbook_flutter/screens/song_display.dart';
-import 'package:songbook_flutter/utilities/constants.dart';
-
 class SongSearch extends StatelessWidget {
   final bool fromHome;
   static const String idFromHome = 'song_search_home';
@@ -13,8 +11,7 @@ class SongSearch extends StatelessWidget {
   SongSearch({required this.fromHome});
 
   void _gotoSong(BuildContext context, int songId) {
-    final index = songId - kStarting;
-    context.read<SongData>().openSong(index);
+    context.read<SongData>().openSong(songId - 1);
     if (fromHome) {
       Navigator.pushReplacementNamed(context, SongDisplay.id);
     } else {
