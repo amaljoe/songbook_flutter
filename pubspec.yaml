@@ -31,6 +31,7 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.3.1
+  flutter_native_splash: ^2.4.3
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,13 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#1a1c1f"
+  android_12:
+    color: "#ffffff"
+    color_dark: "#1a1c1f"
+
 flutter_launcher_icons:
   android: true
   ios: true

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:songbook_flutter/models/book_data.dart';
 import 'package:songbook_flutter/models/song_data.dart';
@@ -23,6 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
     WidgetsBinding.instance.addPostFrameCallback((_) => _loading());
   }
 
