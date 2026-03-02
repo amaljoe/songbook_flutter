@@ -13,11 +13,11 @@ A Malayalam Christian songbook app for the Church of South India, built with Flu
     <td align="center"><b>Settings</b></td>
   </tr>
   <tr>
-    <td><img src="assets/images/song_light_theme.png" width="160"/></td>
-    <td><img src="assets/images/song_dark_theme.png" width="160"/></td>
-    <td><img src="assets/images/search.png" width="160"/></td>
-    <td><img src="assets/images/liturgy.png" width="160"/></td>
-    <td><img src="assets/images/settings.png" width="160"/></td>
+    <td><img src="docs/screenshots/song_light_theme.png" width="160"/></td>
+    <td><img src="docs/screenshots/song_dark_theme.png" width="160"/></td>
+    <td><img src="docs/screenshots/search.png" width="160"/></td>
+    <td><img src="docs/screenshots/liturgy.png" width="160"/></td>
+    <td><img src="docs/screenshots/settings.png" width="160"/></td>
   </tr>
 </table>
 
@@ -71,8 +71,14 @@ flutter pub get
 # Run on connected device / emulator
 flutter run
 
-# Build for Android
+# Build for Android (universal APK, ~35 MB, excludes x86_64 emulator ABI)
 flutter build apk
+
+# Build split APKs per CPU architecture (~16–20 MB each — best for direct installs)
+flutter build apk --split-per-abi
+
+# Build Android App Bundle for Play Store (~10–15 MB per device)
+flutter build appbundle
 
 # Build for iOS
 flutter build ios

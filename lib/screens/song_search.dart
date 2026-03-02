@@ -41,8 +41,8 @@ class _SongSearchState extends State<SongSearch> {
     final query = _controller.text.trim();
     if (query.isNotEmpty) {
       context.read<SearchHistoryData>().addSearch(query);
-      context.read<SearchHistoryData>().recordOpen(songId);
     }
+    context.read<SearchHistoryData>().recordOpen(songId);
     context.read<SongData>().openSong(songId - 1);
     if (widget.fromHome) {
       Navigator.pushReplacementNamed(context, SongDisplay.id);
